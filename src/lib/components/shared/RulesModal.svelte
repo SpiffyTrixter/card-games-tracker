@@ -10,7 +10,9 @@
 </script>
 
 <Dialog.Root bind:open={isOpen}>
-	<Dialog.Content class="flex max-h-[90vh] max-w-3xl flex-col overflow-hidden p-0">
+	<Dialog.Content
+		class="flex max-h-[90vh] max-w-4xl flex-col overflow-hidden p-0 sm:max-w-[90vw] md:max-w-4xl"
+	>
 		<Dialog.Header class="border-b border-border bg-muted/30 px-6 py-4">
 			<Dialog.Title
 				class="text-headline-sm font-display-md flex items-center gap-2 text-primary md:text-headline-lg"

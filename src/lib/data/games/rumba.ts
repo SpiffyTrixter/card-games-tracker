@@ -1,3 +1,5 @@
+import type { Component } from 'svelte';
+
 import RumbaUI from '$components/game/RumbaUI.svelte';
 import { jassDeck } from '$data/decks/jass';
 import RumbaRules from '$data/games/rules/rumba.md';
@@ -27,5 +29,5 @@ export const rumba: Game = {
 	},
 	rules: RumbaRules,
 	logic: rumbaLogic,
-	uiComponent: RumbaUI
+	uiComponent: RumbaUI as Component<Record<string, unknown>>
 };

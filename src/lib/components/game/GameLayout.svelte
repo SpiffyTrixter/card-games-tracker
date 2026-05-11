@@ -25,10 +25,11 @@
 
 	$effect(() => {
 		const inProgress = gameManager.session.state === 'playing';
-		isGameInProgress.set(inProgress);
 
+		// Use untrack or check for changes to avoid infinite loops if headerState is consumed nearby
+		// and triggers re-renders of GameLayout (though Header is usually outside).
 		if (inProgress) {
-			headerState.set({
+			const newState = {
 				title: game.title,
 				showSearch: false,
 				actions: [
@@ -43,13 +44,16 @@
 						onclick: () => (isRulesOpen = true)
 					}
 				]
-			});
+			};
+			headerState.set(newState);
+			isGameInProgress.set(true);
 		} else {
 			headerState.set({
 				title: 'Games',
 				showSearch: true,
 				actions: undefined
 			});
+			isGameInProgress.set(false);
 		}
 	});
 

@@ -129,4 +129,30 @@
 		@apply bg-background font-sans text-foreground;
 		margin: 0;
 	}
+
+	/* Custom Scrollbar Styles */
+	::-webkit-scrollbar {
+		width: 8px;
+		height: 8px;
+	}
+
+	::-webkit-scrollbar-track {
+		@apply bg-muted/30;
+		border-radius: 10px;
+	}
+
+	::-webkit-scrollbar-thumb {
+		@apply bg-primary/40 transition-colors;
+		border-radius: 10px;
+	}
+
+	::-webkit-scrollbar-thumb:hover {
+		@apply bg-primary/60;
+	}
+
+	/* Firefox support */
+	* {
+		scrollbar-width: thin;
+		scrollbar-color: color-mix(in srgb, var(--color-primary) 40%, transparent) transparent;
+	}
 }

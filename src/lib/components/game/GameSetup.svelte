@@ -95,10 +95,9 @@
 
 	<div class="border-t border-border/30 pt-4 md:pt-6">
 		<Button
-			size="lg"
 			onclick={onStart}
 			disabled={gameManager.session.players.length < playersLimit.min}
-			class="text-headline-sm md:text-headline-md h-16 w-full gap-2 rounded-xl shadow-lg transition-all hover:shadow-primary/20 md:h-20"
+			class="w-full py-6 text-lg font-bold shadow-lg"
 		>
 			<span class="material-symbols-outlined text-[24px]">play_circle</span>
 			Commence
