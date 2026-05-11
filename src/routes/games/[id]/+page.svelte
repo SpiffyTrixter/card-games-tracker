@@ -10,7 +10,7 @@
 	import { getGameById } from '$lib/data/games/registry';
 	import { GameManager } from '$lib/state/gameManager.svelte';
 
-	const id = $derived(page.params.id);
+	const id = $derived(page.params.id as string);
 	const game = $derived(getGameById(id));
 
 	let gm = $state<GameManager | null>(null);
@@ -24,7 +24,6 @@
 		untrack(() => {
 			if (currentGameId) {
 				if (!gm || gm.session.gameId !== currentGameId) {
-					console.log('Initializing new GameManager for:', currentGameId);
 					gm = new GameManager(game!);
 				}
 			} else {
@@ -35,7 +34,6 @@
 
 	function startGame() {
 		if (gm && game) {
-			console.log('Starting game:', game.title);
 			gm.startGame(game.initialScore || 0);
 		}
 	}
