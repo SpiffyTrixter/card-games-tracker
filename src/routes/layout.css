@@ -65,14 +65,14 @@
 	--spacing-gutter: 24px;
 	--spacing-unit: 4px;
 
-	--font-family-display-md: "Playfair Display";
-	--font-family-label-lg: "Playfair Display";
-	--font-family-label-sm: "Merriweather";
-	--font-family-headline-lg-mobile: "Playfair Display";
-	--font-family-body-lg: "Merriweather";
-	--font-family-display-lg: "Playfair Display";
-	--font-family-headline-lg: "Playfair Display";
-	--font-family-body-md: "Merriweather";
+	--font-family-display-md: 'Playfair Display';
+	--font-family-label-lg: 'Playfair Display';
+	--font-family-label-sm: 'Merriweather';
+	--font-family-headline-lg-mobile: 'Playfair Display';
+	--font-family-body-lg: 'Merriweather';
+	--font-family-display-lg: 'Playfair Display';
+	--font-family-headline-lg: 'Playfair Display';
+	--font-family-body-md: 'Merriweather';
 
 	--font-size-display-md: 40px;
 	--font-size-label-lg: 14px;
@@ -103,44 +103,44 @@
 }
 
 @utility font-display-md {
-	font-family: var(--font-family-display-md);
+	font-family: var(--font-family-display-md), serif;
 	font-weight: var(--font-weight-display-md);
 }
 
 @utility font-label-lg {
-	font-family: var(--font-family-label-lg);
+	font-family: var(--font-family-label-lg), serif;
 	font-weight: var(--font-weight-label-lg);
 	letter-spacing: 0.05em;
 }
 
 @utility font-label-sm {
-	font-family: var(--font-family-label-sm);
+	font-family: var(--font-family-label-sm), serif;
 	font-weight: var(--font-weight-label-sm);
 }
 
 @utility font-headline-lg-mobile {
-	font-family: var(--font-family-headline-lg-mobile);
+	font-family: var(--font-family-headline-lg-mobile), serif;
 	font-weight: var(--font-weight-headline-lg-mobile);
 }
 
 @utility font-body-lg {
-	font-family: var(--font-family-body-lg);
+	font-family: var(--font-family-body-lg), serif;
 	font-weight: var(--font-weight-body-lg);
 }
 
 @utility font-display-lg {
-	font-family: var(--font-family-display-lg);
+	font-family: var(--font-family-display-lg), serif;
 	font-weight: var(--font-weight-display-lg);
 	letter-spacing: -0.02em;
 }
 
 @utility font-headline-lg {
-	font-family: var(--font-family-headline-lg);
+	font-family: var(--font-family-headline-lg), serif;
 	font-weight: var(--font-weight-headline-lg);
 }
 
 @utility font-body-md {
-	font-family: var(--font-family-body-md);
+	font-family: var(--font-family-body-md), serif;
 	font-weight: var(--font-weight-body-md);
 }
 

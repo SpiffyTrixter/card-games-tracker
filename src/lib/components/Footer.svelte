@@ -1,13 +1,34 @@
-<footer class="bg-surface-dim dark:bg-surface-dim border-t border-outline dark:border-outline mt-auto">
-	<div class="flex flex-col md:flex-row justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-12 max-w-max-width mx-auto gap-8">
-		<div class="font-display-md text-headline-lg text-on-surface-variant">Games</div>
-		<div class="font-body-md text-body-md italic text-on-surface-variant">
+<script lang="ts">
+	import { base } from '$app/paths';
+</script>
+
+<footer
+	class="mt-auto border-t border-outline bg-surface-dim dark:border-outline dark:bg-surface-dim"
+>
+	<div
+		class="mx-auto flex w-full max-w-max-width flex-col items-center justify-between gap-6 px-margin-mobile py-8 md:flex-row md:gap-8 md:px-margin-desktop md:py-12"
+	>
+		<div class="text-headline-sm font-display-md text-on-surface-variant md:text-headline-lg">
+			Games
+		</div>
+		<div
+			class="text-body-sm order-last font-body-md text-on-surface-variant italic md:order-none md:text-body-md"
+		>
 			© 2026 Cimma
 		</div>
-		<nav class="flex gap-6">
-			<a class="text-on-surface-variant font-label-sm text-label-sm hover:text-primary transition-colors focus:outline-none focus:ring-1 focus:ring-primary rounded-DEFAULT" href="/">House Rules</a>
-			<a class="text-on-surface-variant font-label-sm text-label-sm hover:text-primary transition-colors focus:outline-none focus:ring-1 focus:ring-primary rounded-DEFAULT" href="/">Privacy Policy</a>
-			<a class="text-on-surface-variant font-label-sm text-label-sm hover:text-primary transition-colors focus:outline-none focus:ring-1 focus:ring-primary rounded-DEFAULT" href="/">Terms of Service</a>
+		<nav class="flex flex-wrap justify-center gap-4 md:gap-6">
+			<a
+				class="rounded-DEFAULT font-label-sm text-[11px] text-on-surface-variant transition-colors hover:text-primary focus:ring-1 focus:ring-primary focus:outline-none md:text-label-sm"
+				href="{base}/">House Rules</a
+			>
+			<a
+				class="rounded-DEFAULT font-label-sm text-[11px] text-on-surface-variant transition-colors hover:text-primary focus:ring-1 focus:ring-primary focus:outline-none md:text-label-sm"
+				href="{base}/">Privacy Policy</a
+			>
+			<a
+				class="rounded-DEFAULT font-label-sm text-[11px] text-on-surface-variant transition-colors hover:text-primary focus:ring-1 focus:ring-primary focus:outline-none md:text-label-sm"
+				href="{base}/">Terms</a
+			>
 		</nav>
 	</div>
 </footer>
