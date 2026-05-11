@@ -1,8 +1,11 @@
 <script lang="ts">
+	import { flip } from 'svelte/animate';
+	import { dndzone } from 'svelte-dnd-action';
+
+	import { Button } from '$lib/components/ui/button/index.js';
+	import { Input } from '$lib/components/ui/input/index.js';
 	import type { GameManager } from '$lib/state/gameManager.svelte';
 	import type { Players, PlayerState } from '$lib/types/game';
-	import { dndzone } from 'svelte-dnd-action';
-	import { flip } from 'svelte/animate';
 
 	let {
 		gameManager,
@@ -33,21 +36,23 @@
 	<div class="flex items-end justify-between">
 		<div class="space-y-1">
 			<h2
-				class="font-display-sm text-headline-sm flex items-center gap-2 text-primary md:font-headline-lg md:text-[20px]"
+				class="font-display-sm text-headline-sm md:font-headline-lg flex items-center gap-2 text-primary md:text-[20px]"
 			>
 				<span class="material-symbols-outlined">person_add</span> Players
 			</h2>
-			<p class="font-label-sm text-[10px] text-on-surface-variant/60 md:text-[11px]">
+			<p class="font-label-sm text-[10px] text-muted-foreground md:text-[11px]">
 				Drag to change sequence
 			</p>
 		</div>
-		<button
+		<Button
+			variant="outline"
+			size="sm"
 			onclick={addPlayer}
 			disabled={gameManager.session.players.length >= playersLimit.max}
-			class="rounded-DEFAULT border border-outline bg-surface-container px-3 py-1.5 font-label-sm text-[11px] transition-colors hover:border-primary disabled:opacity-30 md:px-4 md:py-2 md:text-label-sm"
+			class="gap-1 border-border bg-muted hover:border-primary"
 		>
-			+ Add
-		</button>
+			<span class="material-symbols-outlined text-[16px]">add</span> Add
+		</Button>
 	</div>
 
 	<div
@@ -59,41 +64,44 @@
 		{#each gameManager.session.players as player (player.id)}
 			<div
 				animate:flip={{ duration: 200 }}
-				class="flex items-center gap-2 rounded-xl border border-outline/30 bg-surface-container/40 p-2 md:gap-3 md:p-3"
+				class="flex items-center gap-2 rounded-xl border border-border/30 bg-muted/40 p-2 md:gap-3 md:p-3"
 			>
 				<div
-					class="flex cursor-grab items-center px-1 text-on-surface-variant/30 active:cursor-grabbing md:px-2"
+					class="flex cursor-grab items-center px-1 text-muted-foreground/50 active:cursor-grabbing md:px-2"
 				>
 					<span class="material-symbols-outlined text-[20px] md:text-[24px]">drag_indicator</span>
 				</div>
 
 				<div class="min-w-0 grow">
-					<input
+					<Input
 						bind:value={player.name}
 						placeholder="Enter Name"
-						class="font-headline-sm md:font-headline-md text-headline-sm md:text-headline-md w-full border-none bg-transparent py-1 text-on-surface placeholder:text-on-surface-variant/20 focus:ring-0"
+						class="font-headline-sm md:font-headline-md text-headline-sm md:text-headline-md w-full border-none bg-transparent py-1 text-foreground shadow-none placeholder:text-muted-foreground/40 focus-visible:ring-0"
 					/>
 				</div>
 
-				<button
+				<Button
+					variant="ghost"
+					size="icon"
 					onclick={() => gameManager.removePlayer(player.id)}
 					disabled={gameManager.session.players.length <= playersLimit.min}
-					class="flex h-8 w-8 items-center justify-center text-on-surface-variant transition-colors hover:text-error disabled:opacity-0 md:h-10 md:w-10"
+					class="text-muted-foreground hover:bg-destructive/10 hover:text-destructive"
 				>
 					<span class="material-symbols-outlined text-[20px]">delete</span>
-				</button>
+				</Button>
 			</div>
 		{/each}
 	</div>
 
-	<div class="border-t border-outline/30 pt-4 md:pt-6">
-		<button
+	<div class="border-t border-border/30 pt-4 md:pt-6">
+		<Button
+			size="lg"
 			onclick={onStart}
 			disabled={gameManager.session.players.length < playersLimit.min}
-			class="text-headline-sm md:text-headline-md flex w-full items-center justify-center gap-2 rounded-xl bg-primary py-4 font-display-md text-surface shadow-lg transition-all hover:bg-primary-light hover:shadow-primary/20 disabled:bg-outline/20 disabled:text-on-surface-variant/40 md:py-5"
+			class="text-headline-sm md:text-headline-md h-16 w-full gap-2 rounded-xl shadow-lg transition-all hover:shadow-primary/20 md:h-20"
 		>
-			<span class="material-symbols-outlined">play_circle</span>
+			<span class="material-symbols-outlined text-[24px]">play_circle</span>
 			Commence
-		</button>
+		</Button>
 	</div>
 </div>

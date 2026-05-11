@@ -1,16 +1,17 @@
 <script lang="ts">
+	import { fade, slide } from 'svelte/transition';
+
 	import GameLayout from '$lib/components/game/GameLayout.svelte';
 	import GameSetup from '$lib/components/game/GameSetup.svelte';
 	import Scoreboard from '$lib/components/game/Scoreboard.svelte';
 	import ScoreTable from '$lib/components/game/ScoreTable.svelte';
-	import { GameManager } from '$lib/state/gameManager.svelte';
 	import { rumba } from '$lib/data/games/rumba';
-	import { slide, fade } from 'svelte/transition';
+	import { GameManager } from '$lib/state/gameManager.svelte';
 
 	const TOTAL_TRICKS = 5;
 	const INITIAL_SCORE = 15;
 
-	const gm = new GameManager(rumba.id);
+	const gm = new GameManager(rumba);
 
 	// Rumba specific state
 	type RoundPhase = 'participants' | 'rumba' | 'scoring';
@@ -129,7 +130,7 @@
 		<div class="space-y-6 p-4 md:space-y-8 md:p-8">
 			<!-- Round Phase Wizard Header -->
 			<div
-				class="mb-4 flex items-center justify-between rounded-xl border border-outline bg-surface-container-high p-1 font-label-sm text-[9px] tracking-wider uppercase md:mb-8 md:p-2 md:text-[10px]"
+				class="bg-surface-container-high font-label-sm mb-4 flex items-center justify-between rounded-xl border border-outline p-1 text-[9px] tracking-wider uppercase md:mb-8 md:p-2 md:text-[10px]"
 			>
 				<button
 					onclick={() => {
@@ -138,8 +139,8 @@
 					}}
 					class="flex-1 rounded-DEFAULT py-2 text-center transition-all {roundPhase ===
 					'participants'
-						? 'bg-primary text-on-primary'
-						: 'text-on-surface-variant hover:bg-surface-container-highest'}"
+						? 'text-on-primary bg-primary'
+						: 'hover:bg-surface-container-highest text-on-surface-variant'}"
 				>
 					1. <span class="xs:inline hidden">Participants</span><span class="xs:hidden">Who?</span>
 				</button>
@@ -157,8 +158,8 @@
 						}
 					}}
 					class="flex-1 rounded-DEFAULT py-2 text-center transition-all {roundPhase === 'rumba'
-						? 'bg-primary text-on-primary'
-						: 'text-on-surface-variant hover:bg-surface-container-highest'}"
+						? 'text-on-primary bg-primary'
+						: 'hover:bg-surface-container-highest text-on-surface-variant'}"
 				>
 					2. Rumba
 				</button>
@@ -176,8 +177,8 @@
 						}
 					}}
 					class="flex-1 rounded-DEFAULT py-2 text-center transition-all {roundPhase === 'scoring'
-						? 'bg-primary text-on-primary'
-						: 'text-on-surface-variant hover:bg-surface-container-highest'}"
+						? 'text-on-primary bg-primary'
+						: 'hover:bg-surface-container-highest text-on-surface-variant'}"
 				>
 					3. Scoring
 				</button>
@@ -198,14 +199,14 @@
 							{@const disableSit = player.score <= 5 || getConsecutiveSits(player.id) >= 2}
 							<div
 								class="flex flex-col justify-between gap-3 rounded-xl border p-3 transition-all sm:flex-row sm:items-center md:p-4 {!isSit
-									? 'border-outline bg-surface-container'
-									: 'border-outline/30 bg-surface-container-low'}"
+									? 'bg-surface-container border-outline'
+									: 'bg-surface-container-low border-outline/30'}"
 							>
 								<div class="flex items-center gap-3 {isSit ? 'opacity-40' : ''}">
 									<span class="font-headline-sm">{player.name}</span>
 								</div>
 								<div
-									class="relative flex h-10 w-full overflow-hidden rounded-lg bg-surface-container-highest p-1 sm:w-48 md:h-11"
+									class="bg-surface-container-highest relative flex h-10 w-full overflow-hidden rounded-lg p-1 sm:w-48 md:h-11"
 								>
 									<div
 										class="absolute top-1 bottom-1 left-1 w-[calc(50%-4px)] {isSit
@@ -219,7 +220,7 @@
 											roundInputs[i].state = 'standard';
 											error = '';
 										}}
-										class="relative z-10 flex-1 rounded-md px-4 py-1.5 font-label-sm text-[10px] uppercase transition-colors duration-300 md:py-2 {isSit
+										class="font-label-sm relative z-10 flex-1 rounded-md px-4 py-1.5 text-[10px] uppercase transition-colors duration-300 md:py-2 {isSit
 											? 'text-on-surface-variant'
 											: 'text-on-primary'}"
 									>
@@ -228,7 +229,7 @@
 									<button
 										onclick={() => toggleSitOut(i)}
 										disabled={disableSit && !isSit}
-										class="relative z-10 flex-1 rounded-md px-4 py-1.5 font-label-sm text-[10px] uppercase transition-colors duration-300 disabled:opacity-20 md:py-2 {isSit
+										class="font-label-sm relative z-10 flex-1 rounded-md px-4 py-1.5 text-[10px] uppercase transition-colors duration-300 disabled:opacity-20 md:py-2 {isSit
 											? 'font-bold text-primary'
 											: 'text-on-surface-variant'}"
 									>
@@ -241,7 +242,7 @@
 
 					{#if error}
 						<div
-							class="flex items-center gap-2 rounded-xl border border-error/20 bg-error/10 p-4 text-sm text-error"
+							class="border-error/20 bg-error/10 text-error flex items-center gap-2 rounded-xl border p-4 text-sm"
 							transition:slide
 						>
 							<span class="material-symbols-outlined">error</span>
@@ -258,7 +259,7 @@
 								error = '';
 							}
 						}}
-						class="text-headline-sm mt-4 w-full rounded-xl bg-primary py-5 font-display-md text-surface shadow-lg transition-all hover:bg-primary-light"
+						class="text-headline-sm font-display-md hover:bg-primary-light mt-4 w-full rounded-xl bg-primary py-5 text-surface shadow-lg transition-all"
 					>
 						Confirm Participants
 					</button>
@@ -279,12 +280,12 @@
 								<div
 									class="flex flex-col justify-between gap-3 rounded-xl border p-3 transition-all sm:flex-row sm:items-center md:p-4 {isRumba
 										? 'border-primary bg-primary/5 ring-1 ring-primary/20'
-										: 'border-outline bg-surface-container/50'}"
+										: 'bg-surface-container/50 border-outline'}"
 								>
 									<span class="font-headline-sm {isRumba ? 'text-primary' : ''}">{player.name}</span
 									>
 									<div
-										class="relative flex h-10 w-full overflow-hidden rounded-lg bg-surface-container-highest p-1 sm:w-48 md:h-11"
+										class="bg-surface-container-highest relative flex h-10 w-full overflow-hidden rounded-lg p-1 sm:w-48 md:h-11"
 									>
 										<!-- Sliding Background -->
 										<div
@@ -296,7 +297,7 @@
 											onclick={() => {
 												roundInputs[i].state = 'standard';
 											}}
-											class="relative z-10 flex-1 rounded-md px-4 py-1.5 font-label-sm text-[10px] uppercase transition-colors duration-300 md:py-2 {isRumba
+											class="font-label-sm relative z-10 flex-1 rounded-md px-4 py-1.5 text-[10px] uppercase transition-colors duration-300 md:py-2 {isRumba
 												? 'text-on-surface-variant'
 												: 'text-on-primary'}"
 										>
@@ -304,8 +305,8 @@
 										</button>
 										<button
 											onclick={() => toggleRumba(i)}
-											class="relative z-10 flex-1 rounded-md px-4 py-1.5 font-label-sm text-[10px] uppercase transition-colors duration-300 md:py-2 {isRumba
-												? 'font-bold text-on-primary'
+											class="font-label-sm relative z-10 flex-1 rounded-md px-4 py-1.5 text-[10px] uppercase transition-colors duration-300 md:py-2 {isRumba
+												? 'text-on-primary font-bold'
 												: 'text-on-surface-variant'}"
 										>
 											Rumba!
@@ -319,13 +320,13 @@
 					<div class="flex gap-4 pt-4">
 						<button
 							onclick={() => (roundPhase = 'participants')}
-							class="flex-1 rounded-xl border border-outline py-4 font-label-lg transition-all hover:border-on-surface"
+							class="font-label-lg flex-1 rounded-xl border border-outline py-4 transition-all hover:border-on-surface"
 						>
 							Back
 						</button>
 						<button
 							onclick={() => (roundPhase = 'scoring')}
-							class="text-headline-sm flex-2 rounded-xl bg-primary py-4 font-display-md text-surface shadow-lg transition-all hover:bg-primary-light"
+							class="text-headline-sm font-display-md hover:bg-primary-light flex-2 rounded-xl bg-primary py-4 text-surface shadow-lg transition-all"
 						>
 							Enter Tricks
 						</button>
@@ -359,7 +360,7 @@
 						{#each gm.session.players as player, i (player.id)}
 							{#if roundInputs[i].state !== 'sit-out'}
 								<div
-									class="flex items-center justify-between gap-4 rounded-xl border border-outline bg-surface-container p-3 md:p-4"
+									class="bg-surface-container flex items-center justify-between gap-4 rounded-xl border border-outline p-3 md:p-4"
 								>
 									<div class="min-w-0">
 										<span class="font-headline-sm block truncate">{player.name}</span>
@@ -374,18 +375,18 @@
 										<button
 											onclick={() =>
 												(roundInputs[i].tricks = Math.max(0, roundInputs[i].tricks - 1))}
-											class="flex h-9 w-9 items-center justify-center rounded-lg border border-outline bg-surface-container-high md:h-10 md:w-10"
+											class="bg-surface-container-high flex h-9 w-9 items-center justify-center rounded-lg border border-outline md:h-10 md:w-10"
 										>
 											<span class="material-symbols-outlined text-[20px]">remove</span>
 										</button>
 										<span
-											class="w-6 text-center font-display-md text-[20px] text-primary md:w-8 md:text-[24px]"
+											class="font-display-md w-6 text-center text-[20px] text-primary md:w-8 md:text-[24px]"
 											>{roundInputs[i].tricks}</span
 										>
 										<button
 											onclick={() => (roundInputs[i].tricks = roundInputs[i].tricks + 1)}
 											disabled={remainingTricks <= 0}
-											class="flex h-9 w-9 items-center justify-center rounded-lg border border-outline bg-surface-container-high disabled:opacity-30 md:h-10 md:w-10"
+											class="bg-surface-container-high flex h-9 w-9 items-center justify-center rounded-lg border border-outline disabled:opacity-30 md:h-10 md:w-10"
 										>
 											<span class="material-symbols-outlined text-[20px]">add</span>
 										</button>
@@ -397,7 +398,7 @@
 
 					{#if error}
 						<div
-							class="flex items-center gap-2 rounded-xl border border-error/20 bg-error/10 p-4 text-sm text-error"
+							class="border-error/20 bg-error/10 text-error flex items-center gap-2 rounded-xl border p-4 text-sm"
 							transition:slide
 						>
 							<span class="material-symbols-outlined">error</span>
@@ -408,13 +409,13 @@
 					<div class="flex gap-4 pt-6">
 						<button
 							onclick={() => (roundPhase = 'rumba')}
-							class="flex-1 rounded-xl border border-outline py-4 font-label-lg transition-all hover:border-on-surface"
+							class="font-label-lg flex-1 rounded-xl border border-outline py-4 transition-all hover:border-on-surface"
 						>
 							Back
 						</button>
 						<button
 							onclick={submitRound}
-							class="text-headline-sm flex-2 rounded-xl bg-primary py-4 font-display-md text-surface shadow-lg shadow-primary/20 transition-all hover:bg-primary-light"
+							class="text-headline-sm font-display-md hover:bg-primary-light flex-2 rounded-xl bg-primary py-4 text-surface shadow-lg shadow-primary/20 transition-all"
 						>
 							Record Round
 						</button>
@@ -438,7 +439,7 @@
 			</div>
 
 			<div
-				class="w-full max-w-md space-y-4 rounded-2xl border border-outline bg-surface-container/30 p-6"
+				class="bg-surface-container/30 w-full max-w-md space-y-4 rounded-2xl border border-outline p-6"
 			>
 				<h3 class="font-label-lg tracking-widest text-on-surface-variant uppercase">
 					Final Standings
@@ -453,7 +454,7 @@
 
 			<button
 				onclick={() => gm.reset()}
-				class="rounded-xl bg-primary px-12 py-4 font-label-lg text-surface shadow-xl transition-all hover:bg-primary-light"
+				class="font-label-lg hover:bg-primary-light rounded-xl bg-primary px-12 py-4 text-surface shadow-xl transition-all"
 			>
 				New Match
 			</button>

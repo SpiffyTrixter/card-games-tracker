@@ -1,6 +1,19 @@
-import type { Game } from '$lib/types/game';
-import { jassDeck } from '$lib/data/decks/jass';
-import RumbaRules from '$lib/data/games/rules/rumba.md';
+import RumbaUI from '$components/game/RumbaUI.svelte';
+import { jassDeck } from '$data/decks/jass';
+import RumbaRules from '$data/games/rules/rumba.md';
+import type { Game, PlayerState, RoundData, ScoringStrategy } from '$types/game';
+
+const rumbaLogic: ScoringStrategy = {
+	calculateScore: (roundInput: Record<string, Record<string, any>>, players: PlayerState[]) => {
+		const roundData: Record<string, RoundData> = {};
+		players.forEach((p) => {
+			if (roundInput && roundInput[p.id]) {
+				roundData[p.id] = { delta: (roundInput[p.id].score as number) || 0 };
+			}
+		});
+		return roundData;
+	}
+};
 
 export const rumba: Game = {
 	id: 'rumba',
@@ -12,5 +25,7 @@ export const rumba: Game = {
 	props: {
 		deck: jassDeck
 	},
-	rules: RumbaRules
+	rules: RumbaRules,
+	logic: rumbaLogic,
+	uiComponent: RumbaUI
 };

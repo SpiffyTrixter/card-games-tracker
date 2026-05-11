@@ -45,12 +45,12 @@
 			class="relative flex max-h-[80vh] w-full max-w-2xl flex-col overflow-hidden rounded-2xl border border-outline bg-surface shadow-2xl"
 		>
 			<div class="flex items-center justify-between border-b border-outline p-6">
-				<h3 class="text-headline-md flex items-center gap-2 font-display-md text-primary">
+				<h3 class="text-headline-md font-display-md flex items-center gap-2 text-primary">
 					<span class="material-symbols-outlined">history</span> Game History
 				</h3>
 				<button
 					onclick={() => (isOpen = false)}
-					class="flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-surface-variant"
+					class="hover:bg-surface-variant flex h-10 w-10 items-center justify-center rounded-full transition-colors"
 				>
 					<span class="material-symbols-outlined">close</span>
 				</button>
@@ -59,7 +59,7 @@
 			<div class="flex border-b border-outline">
 				<button
 					onclick={() => (activeTab = 'rounds')}
-					class="flex-1 border-b-2 py-4 font-label-lg transition-colors"
+					class="font-label-lg flex-1 border-b-2 py-4 transition-colors"
 					class:border-primary={activeTab === 'rounds'}
 					class:text-primary={activeTab === 'rounds'}
 					class:border-transparent={activeTab !== 'rounds'}
@@ -69,7 +69,7 @@
 				</button>
 				<button
 					onclick={() => (activeTab = 'matches')}
-					class="flex-1 border-b-2 py-4 font-label-lg transition-colors"
+					class="font-label-lg flex-1 border-b-2 py-4 transition-colors"
 					class:border-primary={activeTab === 'matches'}
 					class:text-primary={activeTab === 'matches'}
 					class:border-transparent={activeTab !== 'matches'}
@@ -88,15 +88,15 @@
 					{:else}
 						{#each roundIndices as roundIndex (roundIndex)}
 							<div
-								class="overflow-hidden rounded-xl border border-outline/30 bg-surface-container/40"
+								class="bg-surface-container/40 overflow-hidden rounded-xl border border-outline/30"
 							>
 								<div
-									class="flex items-center justify-between border-b border-outline/30 bg-surface-container/60 p-3"
+									class="bg-surface-container/60 flex items-center justify-between border-b border-outline/30 p-3"
 								>
 									<span class="font-label-md text-primary">Round {roundIndex + 1}</span>
 									<button
 										onclick={() => handleRewind(roundIndex)}
-										class="flex items-center gap-1 rounded px-2 py-1 font-label-sm text-[12px] text-primary transition-colors hover:bg-primary/10"
+										class="font-label-sm flex items-center gap-1 rounded px-2 py-1 text-[12px] text-primary transition-colors hover:bg-primary/10"
 									>
 										<span class="material-symbols-outlined text-[14px]"
 											>settings_backup_restore</span

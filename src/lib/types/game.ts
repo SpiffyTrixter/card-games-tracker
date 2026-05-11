@@ -1,3 +1,5 @@
+import type { Component } from 'svelte';
+
 export interface Players {
 	min: number;
 	max: number;
@@ -24,8 +26,23 @@ export interface Game {
 	players: Players;
 	icon?: string;
 	props?: GameProps;
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 	rules?: any; // Rules can be a markdown string or a Svelte component
+	logic?: ScoringStrategy;
+	uiComponent?: Component<Record<string, unknown>>; // Svelte 5 component for game-specific active UI
+}
+
+export interface RoundData {
+	delta: number;
+	tricks?: number;
+	metadata?: Record<string, unknown>;
+}
+
+export interface ScoringStrategy {
+	calculateScore: (
+		roundInput: Record<string, Record<string, unknown>>,
+		players: PlayerState[]
+	) => Record<string, RoundData>;
 }
 
 export interface PlayerHistoryEntry {

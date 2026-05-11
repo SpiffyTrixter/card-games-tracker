@@ -1,6 +1,9 @@
-import type { GameSession, PlayerHistoryEntry } from '$lib/types/game';
+import { getContext, setContext } from 'svelte';
+
+import type { Game, GameSession, PlayerHistoryEntry } from '$types/game';
 
 export class GameManager {
+	currentGame: Game | undefined;
 	session = $state<GameSession>({
 		id: crypto.randomUUID(),
 		gameId: '',
@@ -9,8 +12,9 @@ export class GameManager {
 		startTime: Date.now()
 	});
 
-	constructor(gameId: string) {
-		this.session.gameId = gameId;
+	constructor(game: Game) {
+		this.session.gameId = game.id;
+		this.currentGame = game;
 		// Initialize with 2 default players
 		this.addPlayer('Player 1');
 		this.addPlayer('Player 2');
@@ -35,6 +39,15 @@ export class GameManager {
 		this.session.players.forEach((p) => (p.score = initialScore));
 		this.session.state = 'playing';
 		this.session.startTime = Date.now();
+	}
+
+	addRoundFromInput(roundInput: Record<string, Record<string, unknown>>) {
+		if (!this.currentGame?.logic) {
+			console.warn('No logic defined for game: ' + this.session.gameId);
+			return;
+		}
+		const roundData = this.currentGame.logic.calculateScore(roundInput, this.session.players);
+		this.addRound(roundData);
 	}
 
 	addRound(
@@ -88,4 +101,14 @@ export class GameManager {
 			p.history = [];
 		});
 	}
+}
+
+const GAME_MANAGER_KEY = Symbol('GAME_MANAGER');
+
+export function setGameManager(manager: GameManager) {
+	setContext(GAME_MANAGER_KEY, manager);
+}
+
+export function getGameManager(): GameManager {
+	return getContext<GameManager>(GAME_MANAGER_KEY);
 }

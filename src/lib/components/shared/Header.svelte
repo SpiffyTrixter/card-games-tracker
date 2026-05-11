@@ -1,7 +1,9 @@
 <script lang="ts">
-	import { isGameInProgress, headerState } from '$lib/stores/gameStatus';
 	import { beforeNavigate, goto } from '$app/navigation';
 	import { base } from '$app/paths';
+	import { Button } from '$components/ui/button/index.js';
+	import { Input } from '$components/ui/input/index.js';
+	import { headerState, isGameInProgress } from '$lib/stores/gameStatus';
 	import { confirmDialog } from '$lib/utils/dialogs';
 
 	async function handleGamesLinkClick(e: MouseEvent) {
@@ -61,7 +63,7 @@
 				class="flex-shrink-0 transition-opacity hover:opacity-80"
 			>
 				<h1
-					class="text-headline-sm overflow-hidden font-display-md tracking-tight text-ellipsis whitespace-nowrap text-primary md:text-display-md dark:text-primary"
+					class="text-headline-sm font-display-md overflow-hidden tracking-tight text-ellipsis whitespace-nowrap text-primary md:text-display-md dark:text-primary"
 				>
 					{$headerState.title || 'Games'}
 				</h1>
@@ -70,16 +72,18 @@
 			{#if $headerState.actions}
 				<div class="flex items-center gap-1 border-l border-outline/30 pl-2 md:gap-3 md:pl-6">
 					{#each $headerState.actions as action (action.label)}
-						<button
+						<Button
+							variant="ghost"
+							size="sm"
 							onclick={action.onclick}
-							class="flex items-center gap-2 rounded-DEFAULT px-2 py-1.5 text-on-surface-variant transition-colors hover:bg-surface-container-high hover:text-primary md:px-3"
+							class="gap-2 text-muted-foreground hover:bg-accent hover:text-primary"
 							title={action.label}
 						>
 							<span class="material-symbols-outlined text-[20px]">{action.icon}</span>
-							<span class="hidden font-label-sm text-label-sm tracking-wider uppercase sm:inline"
+							<span class="font-label-sm text-label-sm hidden tracking-wider uppercase sm:inline"
 								>{action.label}</span
 							>
-						</button>
+						</Button>
 					{/each}
 				</div>
 			{/if}
@@ -93,8 +97,8 @@
 							>search</span
 						>
 					</div>
-					<input
-						class="font-body-sm block w-32 rounded-full border border-outline bg-surface-container py-1.5 pr-4 pl-10 text-sm text-on-surface placeholder-on-surface-variant transition-all duration-300 focus:border-primary focus:ring-1 focus:ring-primary sm:w-48 md:w-64 md:py-2 md:pl-12 md:font-body-md md:text-body-md"
+					<Input
+						class="font-body-sm md:font-body-md block w-32 rounded-full border-border bg-secondary py-1.5 pr-4 pl-10 text-sm transition-all duration-300 placeholder:text-muted-foreground focus-visible:border-primary focus-visible:ring-1 focus-visible:ring-primary sm:w-48 md:w-64 md:py-2 md:pl-12 md:text-body-md"
 						placeholder="Search..."
 						type="text"
 					/>
@@ -102,13 +106,15 @@
 			{/if}
 
 			{#if $isGameInProgress}
-				<button
+				<Button
+					variant="destructive"
+					size="sm"
 					onclick={handleStopGame}
-					class="flex items-center gap-1 rounded-DEFAULT border border-error/20 bg-error/10 px-2 py-1.5 font-label-sm text-[10px] tracking-widest text-error uppercase transition-all hover:bg-error/20 md:gap-2 md:px-4 md:py-2 md:text-label-sm"
+					class="font-label-sm md:text-label-sm gap-1 border border-destructive/20 bg-destructive/10 text-[10px] tracking-widest text-destructive uppercase hover:bg-destructive/20 md:gap-2"
 				>
 					<span class="material-symbols-outlined text-[16px] md:text-[18px]">stop_circle</span>
 					<span class="xs:inline hidden">Stop</span><span class="hidden sm:inline"> Game</span>
-				</button>
+				</Button>
 			{/if}
 		</div>
 	</div>

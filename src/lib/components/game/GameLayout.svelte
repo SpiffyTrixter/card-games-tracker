@@ -1,12 +1,14 @@
 <script lang="ts">
-	import type { GameManager } from '$lib/state/gameManager.svelte';
-	import type { Game } from '$lib/types/game';
-	import Header from '$lib/components/Header.svelte';
-	import Footer from '$lib/components/Footer.svelte';
-	import RulesModal from '$lib/components/RulesModal.svelte';
-	import GameHistory from './GameHistory.svelte';
-	import { isGameInProgress, headerState } from '$lib/stores/gameStatus';
 	import { onMount, type Snippet } from 'svelte';
+
+	import Footer from '$components/shared/Footer.svelte';
+	import Header from '$components/shared/Header.svelte';
+	import RulesModal from '$components/shared/RulesModal.svelte';
+	import type { GameManager } from '$lib/state/gameManager.svelte';
+	import { headerState, isGameInProgress } from '$lib/stores/gameStatus';
+	import type { Game } from '$lib/types/game';
+
+	import GameHistory from './GameHistory.svelte';
 
 	let {
 		game,
@@ -74,12 +76,12 @@
 			>
 				<div class="flex max-w-2xl flex-col gap-4 md:gap-6">
 					<h2
-						class="font-display-md text-headline-lg text-primary-light drop-shadow-md md:font-display-lg md:text-display-lg"
+						class="font-display-md text-primary-light md:font-display-lg text-headline-lg drop-shadow-md md:text-display-lg"
 					>
 						{game.title}
 					</h2>
 					<p
-						class="max-w-xl font-body-md text-body-md text-on-surface-variant md:font-body-lg md:text-body-lg"
+						class="font-body-md md:font-body-lg max-w-xl text-body-md text-on-surface-variant md:text-body-lg"
 					>
 						{game.description}
 					</p>
@@ -94,14 +96,14 @@
 							{game.players.min}-{game.players.max}
 						</div>
 						<div
-							class="font-label-sm text-[10px] tracking-wider text-on-surface-variant uppercase md:text-label-sm"
+							class="font-label-sm md:text-label-sm text-[10px] tracking-wider text-on-surface-variant uppercase"
 						>
 							Players
 						</div>
 					</div>
 					<button
 						onclick={() => (isRulesOpen = true)}
-						class="flex items-center gap-2 rounded-DEFAULT border border-outline bg-surface/30 px-4 py-2 font-label-sm text-[10px] tracking-wider text-primary uppercase backdrop-blur-md transition-colors duration-300 hover:border-primary"
+						class="font-label-sm flex items-center gap-2 rounded-DEFAULT border border-outline bg-surface/30 px-4 py-2 text-[10px] tracking-wider text-primary uppercase backdrop-blur-md transition-colors duration-300 hover:border-primary"
 					>
 						<span class="material-symbols-outlined text-[18px]">info</span>
 						Rules
@@ -112,7 +114,7 @@
 	{/if}
 
 	<div
-		class="relative flex w-full flex-col overflow-hidden rounded-xl border border-outline bg-surface-container/30 shadow-2xl backdrop-blur-sm"
+		class="bg-surface-container/30 relative flex w-full flex-col overflow-hidden rounded-xl border border-outline shadow-2xl backdrop-blur-sm"
 	>
 		{@render children()}
 	</div>
