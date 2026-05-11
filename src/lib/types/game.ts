@@ -29,7 +29,14 @@ export interface Game {
 
 	rules?: any; // Rules can be a markdown string or a Svelte component
 	logic?: ScoringStrategy;
-	uiComponent?: Component<Record<string, unknown>>; // Svelte 5 component for game-specific active UI
+	initialScore?: number; // Optional initial score for players
+
+	components?: {
+		play?: Component<{ gameManager: any }>;
+		scoreboard?: Component<{ gameManager: any }>;
+		scoreTable?: Component<{ gameManager: any }>;
+		setup?: Component<{ gameManager: any; playersLimit: Players; onStart: () => void }>;
+	};
 }
 
 export interface RoundData {
