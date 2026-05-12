@@ -5,7 +5,7 @@
 	import Header from '$components/shared/Header.svelte';
 	import RulesModal from '$components/shared/RulesModal.svelte';
 	import type { GameManager } from '$lib/state/gameManager.svelte';
-	import { headerState, isGameInProgress } from '$lib/stores/gameStatus';
+	import { gameStatus } from '$lib/state/gameStatus.svelte';
 	import type { Game } from '$lib/types/game';
 
 	import GameHistory from './GameHistory.svelte';
@@ -26,41 +26,26 @@
 	$effect(() => {
 		const inProgress = gameManager.session.state === 'playing';
 
-		// Use untrack or check for changes to avoid infinite loops if headerState is consumed nearby
-		// and triggers re-renders of GameLayout (though Header is usually outside).
 		if (inProgress) {
-			const newState = {
+			gameStatus.headerState = {
 				title: game.title,
 				showSearch: false,
 				actions: [
-					{
-						icon: 'history',
-						label: 'History',
-						onclick: () => (isHistoryOpen = true)
-					},
-					{
-						icon: 'info',
-						label: 'Rules',
-						onclick: () => (isRulesOpen = true)
-					}
+					{ icon: 'history', label: 'History', onclick: () => (isHistoryOpen = true) },
+					{ icon: 'info', label: 'Rules', onclick: () => (isRulesOpen = true) }
 				]
 			};
-			headerState.set(newState);
-			isGameInProgress.set(true);
+			gameStatus.isGameInProgress = true;
 		} else {
-			headerState.set({
-				title: 'Games',
-				showSearch: true,
-				actions: undefined
-			});
-			isGameInProgress.set(false);
+			gameStatus.headerState = { title: 'Games', showSearch: true, actions: undefined };
+			gameStatus.isGameInProgress = false;
 		}
 	});
 
 	onMount(() => {
 		return () => {
-			isGameInProgress.set(false);
-			headerState.set({ title: 'Games', showSearch: true, actions: undefined });
+			gameStatus.isGameInProgress = false;
+			gameStatus.headerState = { title: 'Games', showSearch: true, actions: undefined };
 		};
 	});
 </script>

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { slide } from 'svelte/transition';
 
-	import * as Card from '$lib/components/ui/card/index.js';
+	import * as Card from '$components/ui/card/index.js';
 	import type { GameManager } from '$lib/state/gameManager.svelte';
 
 	let { gameManager }: { gameManager: GameManager } = $props();

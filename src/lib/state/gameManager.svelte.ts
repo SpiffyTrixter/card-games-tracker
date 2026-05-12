@@ -1,5 +1,6 @@
 import { getContext, setContext } from 'svelte';
 
+import { browser } from '$app/environment';
 import type { Game, GameSession, PlayerHistoryEntry } from '$types/game';
 
 export class GameManager {
@@ -9,13 +10,38 @@ export class GameManager {
 		gameId: '',
 		players: [],
 		state: 'setup',
+		initialScore: 0,
 		startTime: Date.now()
 	});
 
 	constructor(game: Game) {
-		this.session.gameId = game.id;
 		this.currentGame = game;
-		// Initialize with 2 default players
+
+		if (browser) {
+			const storageKey = `game_session_${game.id}`;
+			const savedSession = localStorage.getItem(storageKey);
+
+			if (savedSession) {
+				try {
+					this.session = JSON.parse(savedSession);
+				} catch (e) {
+					console.error('Failed to parse saved game session:', e);
+					this.initDefault(game.id);
+				}
+			} else {
+				this.initDefault(game.id);
+			}
+
+			$effect(() => {
+				localStorage.setItem(storageKey, JSON.stringify(this.session));
+			});
+		} else {
+			this.initDefault(game.id);
+		}
+	}
+
+	private initDefault(gameId: string) {
+		this.session.gameId = gameId;
 		this.addPlayer('Player 1');
 		this.addPlayer('Player 2');
 	}
@@ -34,9 +60,13 @@ export class GameManager {
 		this.session.players = this.session.players.filter((p) => p.id !== id);
 	}
 
-	startGame(initialScore = 0) {
+	startGame(customInitialScore?: number) {
 		if (this.session.players.length < 2) return;
-		this.session.players.forEach((p) => (p.score = initialScore));
+
+		const startingScore = customInitialScore ?? this.currentGame?.initialScore ?? 0;
+
+		this.session.initialScore = startingScore;
+		this.session.players.forEach((p) => (p.score = startingScore));
 		this.session.state = 'playing';
 		this.session.startTime = Date.now();
 	}
@@ -73,10 +103,9 @@ export class GameManager {
 
 	rewindTo(roundIndex: number) {
 		if (roundIndex < 0) {
-			// Reset to start of game
 			this.session.players.forEach((p) => {
 				p.history = [];
-				// We'd need to know initial score, assuming it's what they had at start of history
+				p.score = this.session.initialScore;
 			});
 			return;
 		}
@@ -97,8 +126,8 @@ export class GameManager {
 	reset() {
 		this.session.state = 'setup';
 		this.session.players.forEach((p) => {
-			p.score = 0;
 			p.history = [];
+			p.score = this.session.initialScore;
 		});
 	}
 }

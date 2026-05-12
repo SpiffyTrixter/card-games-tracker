@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { base } from '$app/paths';
-	import { Badge } from '$lib/components/ui/badge/index.js';
-	import { Button } from '$lib/components/ui/button/index.js';
-	import * as Card from '$lib/components/ui/card/index.js';
+	import { resolve } from '$app/paths';
+	import { Badge } from '$components/ui/badge/index.js';
+	import { Button } from '$components/ui/button/index.js';
+	import * as Card from '$components/ui/card/index.js';
 	import { getRulesContext } from '$state/rulesContext';
 	import type { Game } from '$types/game';
 
@@ -15,8 +15,7 @@
 		icon = 'style',
 		props,
 		rules,
-		logic,
-		uiComponent
+		logic
 	}: Game = $props();
 
 	const { openRules } = getRulesContext();
@@ -56,7 +55,7 @@
 
 	<Card.Content class="z-10 flex grow flex-col gap-2">
 		<Card.Title
-			class="font-headline-sm md:font-headline-lg text-[20px] leading-tight text-foreground md:text-[24px] md:leading-[32px]"
+			class="font-headline-sm md:font-headline-lg text-[20px] leading-tight text-foreground md:text-[24px] md:leading-8"
 		>
 			{title}
 		</Card.Title>
@@ -113,8 +112,7 @@
 						icon,
 						props,
 						rules,
-						logic,
-						uiComponent
+						logic
 					});
 				}}
 				class="gap-1 border-border bg-background/30 text-primary hover:border-primary"
@@ -122,7 +120,7 @@
 				<span class="material-symbols-outlined text-[14px]">info</span>
 				Rules
 			</Button>
-			<Button size="sm" href="{base}/games/{id}" class="gap-1">
+			<Button size="sm" href={resolve(`/games/${id}`)} class="gap-1">
 				<span
 					class="material-symbols-outlined text-[14px]"
 					style="font-variation-settings: 'FILL' 1;">play_arrow</span

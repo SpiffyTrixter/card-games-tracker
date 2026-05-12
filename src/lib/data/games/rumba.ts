@@ -1,6 +1,3 @@
-import type { Component } from 'svelte';
-
-import RumbaPlay from '$components/game/rumba/RumbaPlay.svelte';
 import { jassDeck } from '$data/decks/jass';
 import RumbaRules from '$data/games/rules/rumba.md';
 import type { Game, PlayerState, RoundData, ScoringStrategy } from '$types/game';
@@ -31,6 +28,6 @@ export const rumba: Game = {
 	logic: rumbaLogic,
 	initialScore: 15,
 	components: {
-		play: RumbaPlay as Component<{ gameManager: any }>
+		play: () => import('$components/game/rumba/RumbaPlay.svelte')
 	}
 };

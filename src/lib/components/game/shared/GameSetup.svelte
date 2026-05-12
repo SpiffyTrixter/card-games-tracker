@@ -2,8 +2,8 @@
 	import { flip } from 'svelte/animate';
 	import { dndzone } from 'svelte-dnd-action';
 
-	import { Button } from '$lib/components/ui/button/index.js';
-	import { Input } from '$lib/components/ui/input/index.js';
+	import { Button } from '$components/ui/button/index.js';
+	import { Input } from '$components/ui/input/index.js';
 	import type { GameManager } from '$lib/state/gameManager.svelte';
 	import type { Players, PlayerState } from '$lib/types/game';
 

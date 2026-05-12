@@ -15,12 +15,9 @@
 
 	let gm = $state<GameManager | null>(null);
 
-	// Recreate GM only when game ID actually changes
 	$effect(() => {
 		const currentGameId = game?.id;
 
-		// Use untrack to ensure that changes to gm.session (like state)
-		// don't trigger this effect to re-run and recreate the manager.
 		untrack(() => {
 			if (currentGameId) {
 				if (!gm || gm.session.gameId !== currentGameId) {
@@ -48,20 +45,43 @@
 {:else if gm}
 	<GameLayout {game} gameManager={gm}>
 		{#if gm.session.state === 'setup'}
-			{@const Setup = game.components?.setup || GameSetup}
-			<Setup gameManager={gm} playersLimit={game.players} onStart={startGame} />
+			{#if game.components?.setup}
+				{#await game.components.setup() then module}
+					{@const Setup = module.default}
+					<Setup gameManager={gm} playersLimit={game.players} onStart={startGame} />
+				{/await}
+			{:else}
+				<GameSetup gameManager={gm} playersLimit={game.players} onStart={startGame} />
+			{/if}
 		{:else if gm.session.state === 'playing'}
-			{@const ScoreboardComp = game.components?.scoreboard || Scoreboard}
-			{@const ScoreTableComp = game.components?.scoreTable || ScoreTable}
 			<div class="flex flex-col gap-6 md:gap-8">
-				<ScoreboardComp gameManager={gm} />
-				<ScoreTableComp gameManager={gm} />
+				{#if game.components?.scoreboard}
+					{#await game.components.scoreboard() then module}
+						{@const ScoreboardComp = module.default}
+						<ScoreboardComp gameManager={gm} />
+					{/await}
+				{:else}
+					<Scoreboard gameManager={gm} />
+				{/if}
+
+				{#if game.components?.scoreTable}
+					{#await game.components.scoreTable() then module}
+						{@const ScoreTableComp = module.default}
+						<ScoreTableComp gameManager={gm} />
+					{/await}
+				{:else}
+					<ScoreTable gameManager={gm} />
+				{/if}
 
 				{#if game.components?.play}
-					{@const Play = game.components.play}
-					<div class="grow">
-						<Play gameManager={gm} />
-					</div>
+					{#await game.components.play()}
+						<div class="p-4 text-center opacity-50">Loading interface...</div>
+					{:then module}
+						{@const Play = module.default}
+						<div class="grow">
+							<Play gameManager={gm} />
+						</div>
+					{/await}
 				{:else}
 					<div class="flex flex-col items-center gap-4 py-24 text-center">
 						<div

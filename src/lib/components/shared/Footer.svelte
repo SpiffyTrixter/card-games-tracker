@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { base } from '$app/paths';
+	import { resolve } from '$app/paths';
 </script>
 
 <footer class="mt-auto border-t border-border bg-muted">
@@ -10,22 +10,22 @@
 			Games
 		</div>
 		<div
-			class="text-body-sm font-body-md order-last text-muted-foreground italic md:order-none md:text-body-md"
+			class="text-body-sm font-body-md order-last text-muted-foreground italic md:order-0 md:text-body-md"
 		>
 			© 2026 Cimma
 		</div>
 		<nav class="flex flex-wrap justify-center gap-4 md:gap-6">
 			<a
 				class="font-label-sm md:text-label-sm rounded-DEFAULT text-[11px] text-muted-foreground transition-colors hover:text-primary focus:ring-1 focus:ring-primary focus:outline-none"
-				href="{base}/">House Rules</a
+				href={resolve('/')}>House Rules</a
 			>
 			<a
 				class="font-label-sm md:text-label-sm rounded-DEFAULT text-[11px] text-muted-foreground transition-colors hover:text-primary focus:ring-1 focus:ring-primary focus:outline-none"
-				href="{base}/">Privacy Policy</a
+				href={resolve('/')}>Privacy Policy</a
 			>
 			<a
 				class="font-label-sm md:text-label-sm rounded-DEFAULT text-[11px] text-muted-foreground transition-colors hover:text-primary focus:ring-1 focus:ring-primary focus:outline-none"
-				href="{base}/">Terms</a
+				href={resolve('/')}>Terms</a
 			>
 		</nav>
 	</div>

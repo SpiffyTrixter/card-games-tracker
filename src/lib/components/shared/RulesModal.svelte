@@ -1,6 +1,13 @@
 <script lang="ts">
 	import { Button } from '$lib/components/ui/button/index.js';
-	import * as Dialog from '$lib/components/ui/dialog/index.js';
+	import {
+		Dialog,
+		DialogContent,
+		DialogFooter,
+		DialogHeader,
+		DialogTitle,
+		DialogTrigger
+	} from '$lib/components/ui/dialog/index.js';
 
 	let { isOpen = $bindable(false), title, rules: RulesComponent } = $props();
 
@@ -9,18 +16,19 @@
 	}
 </script>
 
-<Dialog.Root bind:open={isOpen}>
-	<Dialog.Content
+<Dialog bind:open={isOpen}>
+	<DialogTrigger>Rules</DialogTrigger>
+	<DialogContent
 		class="flex max-h-[90vh] max-w-4xl flex-col overflow-hidden p-0 sm:max-w-[90vw] md:max-w-4xl"
 	>
-		<Dialog.Header class="border-b border-border bg-muted/30 px-6 py-4">
-			<Dialog.Title
+		<DialogHeader class="border-b border-border bg-muted/30 px-6 py-4">
+			<DialogTitle
 				class="text-headline-sm font-display-md flex items-center gap-2 text-primary md:text-headline-lg"
 			>
 				<span class="material-symbols-outlined text-[24px]">description</span>
 				{title} Rules
-			</Dialog.Title>
-		</Dialog.Header>
+			</DialogTitle>
+		</DialogHeader>
 
 		<div class="grow overflow-y-auto px-6 py-4 md:px-10 md:py-8">
 			<article
@@ -41,8 +49,8 @@
 			</article>
 		</div>
 
-		<Dialog.Footer class="border-t border-border bg-muted/30 px-6 py-4">
+		<DialogFooter class="border-t border-border bg-muted/30 px-6 py-4">
 			<Button onclick={close} size="lg" class="font-label-lg w-full md:w-auto">Got it</Button>
-		</Dialog.Footer>
-	</Dialog.Content>
-</Dialog.Root>
+		</DialogFooter>
+	</DialogContent>
+</Dialog>

@@ -1,7 +1,3 @@
-import { writable } from 'svelte/store';
-
-export const isGameInProgress = writable(false);
-
 export interface HeaderAction {
 	icon: string;
 	label: string;
@@ -14,6 +10,9 @@ export interface HeaderState {
 	showSearch?: boolean;
 }
 
-export const headerState = writable<HeaderState>({
-	showSearch: true
-});
+class GameStatus {
+	isGameInProgress = $state(false);
+	headerState = $state<HeaderState>({ showSearch: true });
+}
+
+export const gameStatus = new GameStatus();

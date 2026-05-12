@@ -1,5 +1,7 @@
 import type { Component } from 'svelte';
 
+import type { GameManager } from '$lib/state/gameManager.svelte';
+
 export interface Players {
 	min: number;
 	max: number;
@@ -19,7 +21,7 @@ export interface GameProps {
 }
 
 export interface Game {
-	id: string; // Added ID for routing/tracking
+	id: string;
 	title: string;
 	description: string;
 	category: string;
@@ -27,16 +29,30 @@ export interface Game {
 	icon?: string;
 	props?: GameProps;
 
-	rules?: any; // Rules can be a markdown string or a Svelte component
+	rules?: string | Component;
 	logic?: ScoringStrategy;
-	initialScore?: number; // Optional initial score for players
+	initialScore?: number;
 
 	components?: {
-		play?: Component<{ gameManager: any }>;
-		scoreboard?: Component<{ gameManager: any }>;
-		scoreTable?: Component<{ gameManager: any }>;
-		setup?: Component<{ gameManager: any; playersLimit: Players; onStart: () => void }>;
+		play?: () => Promise<{ default: Component<{ gameManager: GameManager }> }>;
+		scoreboard?: () => Promise<{ default: Component<{ gameManager: GameManager }> }>;
+		scoreTable?: () => Promise<{ default: Component<{ gameManager: GameManager }> }>;
+		setup?: () => Promise<{
+			default: Component<{ gameManager: GameManager; playersLimit: Players; onStart: () => void }>;
+		}>;
 	};
+}
+
+export interface WizardStep {
+	id: string;
+	shortTitle: string;
+	title: string;
+	icon: string;
+	buttonText: string;
+	validate?: () => string | null;
+	filterPlayers?: (player: PlayerState, index: number) => boolean;
+	playerAction: import('svelte').Snippet<[PlayerState, number]>;
+	extraUI?: import('svelte').Snippet;
 }
 
 export interface RoundData {
@@ -56,7 +72,7 @@ export interface PlayerHistoryEntry {
 	tricks?: number;
 	delta: number;
 	scoreAfter: number;
-	metadata?: Record<string, unknown>; // For game-specific data
+	metadata?: Record<string, unknown>;
 }
 
 export interface PlayerState {
@@ -71,6 +87,7 @@ export interface GameSession {
 	gameId: string;
 	players: PlayerState[];
 	state: 'setup' | 'playing' | 'finished';
+	initialScore: number;
 	startTime: number;
 	endTime?: number;
 }

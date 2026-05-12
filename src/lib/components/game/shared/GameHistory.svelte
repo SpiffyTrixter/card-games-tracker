@@ -1,6 +1,13 @@
 <script lang="ts">
-	import { Button } from '$lib/components/ui/button/index.js';
-	import * as Dialog from '$lib/components/ui/dialog/index.js';
+	import { Button } from '$components/ui/button/index.js';
+	import {
+		Dialog,
+		DialogContent,
+		DialogFooter,
+		DialogHeader,
+		DialogTitle,
+		DialogTrigger
+	} from '$components/ui/dialog/index.js';
 	import type { GameManager } from '$lib/state/gameManager.svelte';
 	import { confirmDialog } from '$lib/utils/dialogs';
 
@@ -34,15 +41,16 @@
 	}
 </script>
 
-<Dialog.Root bind:open={isOpen}>
-	<Dialog.Content
+<Dialog bind:open={isOpen}>
+	<DialogTrigger>Open</DialogTrigger>
+	<DialogContent
 		class="flex max-h-[90vh] max-w-2xl flex-col overflow-hidden p-0 sm:max-w-[90vw] md:max-w-2xl"
 	>
-		<Dialog.Header class="border-b border-border bg-muted/30 px-6 py-4">
-			<Dialog.Title class="text-headline-sm font-display-md flex items-center gap-2 text-primary">
+		<DialogHeader class="border-b border-border bg-muted/30 px-6 py-4">
+			<DialogTitle class="text-headline-sm font-display-md flex items-center gap-2 text-primary">
 				<span class="material-symbols-outlined">history</span> Game History
-			</Dialog.Title>
-		</Dialog.Header>
+			</DialogTitle>
+		</DialogHeader>
 
 		<div class="flex border-b border-border bg-muted/10">
 			<button
@@ -113,10 +121,10 @@
 			{/if}
 		</div>
 
-		<Dialog.Footer class="border-t border-border bg-muted/30 px-6 py-4">
+		<DialogFooter class="border-t border-border bg-muted/30 px-6 py-4">
 			<Button onclick={() => (isOpen = false)} size="lg" class="font-label-lg w-full md:w-auto"
 				>Close</Button
 			>
-		</Dialog.Footer>
-	</Dialog.Content>
-</Dialog.Root>
+		</DialogFooter>
+	</DialogContent>
+</Dialog>

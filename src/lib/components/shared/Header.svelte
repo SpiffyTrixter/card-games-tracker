@@ -1,22 +1,20 @@
 <script lang="ts">
 	import { beforeNavigate, goto } from '$app/navigation';
-	import { base } from '$app/paths';
+	import { resolve } from '$app/paths';
 	import { Button } from '$components/ui/button/index.js';
 	import { Input } from '$components/ui/input/index.js';
-	import { headerState, isGameInProgress } from '$lib/stores/gameStatus';
+	import { gameStatus } from '$lib/state/gameStatus.svelte';
 	import { confirmDialog } from '$lib/utils/dialogs';
 
 	async function handleGamesLinkClick(e: MouseEvent) {
-		if ($isGameInProgress) {
+		if (gameStatus.isGameInProgress) {
 			e.preventDefault();
 			const confirmed = await confirmDialog({
 				text: 'A game is currently in progress. Do you really want to leave?',
 				confirmButtonText: 'Leave',
 				cancelButtonText: 'Stay'
 			});
-			if (confirmed) {
-				goto(`${base}/`);
-			}
+			if (confirmed) goto(resolve('/'));
 		}
 	}
 
@@ -26,16 +24,20 @@
 			confirmButtonText: 'Stop Game',
 			cancelButtonText: 'Continue Playing'
 		});
-
 		if (confirmed) {
-			isGameInProgress.set(false);
-			headerState.set({ showSearch: true });
-			goto(`${base}/`);
+			// NEW: Direct mutation
+			gameStatus.isGameInProgress = false;
+			gameStatus.headerState = { showSearch: true };
+			goto(resolve('/'));
 		}
 	}
 
 	beforeNavigate(async ({ cancel, to }) => {
-		if ($isGameInProgress && to?.route.id && (to.route.id as string) !== '/games/[game]') {
+		if (
+			gameStatus.isGameInProgress &&
+			to?.route.id &&
+			(to.route.id as string) !== '/games/[game]'
+		) {
 			cancel();
 			const confirmed = await confirmDialog({
 				text: 'A game is currently in progress. Do you really want to leave?',
@@ -43,7 +45,7 @@
 				cancelButtonText: 'Stay'
 			});
 			if (confirmed) {
-				isGameInProgress.set(false);
+				gameStatus.isGameInProgress = false; // NEW
 				if (to) goto(to.url.pathname);
 			}
 		}
@@ -58,20 +60,20 @@
 	>
 		<div class="flex min-w-0 items-center gap-2 md:gap-6">
 			<a
-				href="{base}/"
+				href={resolve('/')}
 				onclick={handleGamesLinkClick}
-				class="flex-shrink-0 transition-opacity hover:opacity-80"
+				class="shrink-0 transition-opacity hover:opacity-80"
 			>
 				<h1
 					class="text-headline-sm font-display-md overflow-hidden tracking-tight text-ellipsis whitespace-nowrap text-primary md:text-display-md dark:text-primary"
 				>
-					{$headerState.title || 'Games'}
+					{gameStatus.headerState.title || 'Games'}
 				</h1>
 			</a>
 
-			{#if $headerState.actions}
+			{#if gameStatus.headerState.actions}
 				<div class="flex items-center gap-1 border-l border-outline/30 pl-2 md:gap-3 md:pl-6">
-					{#each $headerState.actions as action (action.label)}
+					{#each gameStatus.headerState.actions as action (action.label)}
 						<Button
 							variant="ghost"
 							size="sm"
@@ -89,8 +91,8 @@
 			{/if}
 		</div>
 
-		<div class="flex flex-shrink-0 items-center justify-end gap-2 md:gap-4">
-			{#if $headerState.showSearch}
+		<div class="flex shrink-0 items-center justify-end gap-2 md:gap-4">
+			{#if gameStatus.headerState.showSearch}
 				<div class="relative flex items-center">
 					<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 md:pl-4">
 						<span class="material-symbols-outlined text-[18px] text-primary/70 md:text-[20px]"
@@ -105,7 +107,7 @@
 				</div>
 			{/if}
 
-			{#if $isGameInProgress}
+			{#if gameStatus.isGameInProgress}
 				<Button
 					variant="destructive"
 					size="sm"
