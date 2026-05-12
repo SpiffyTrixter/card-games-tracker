@@ -5,8 +5,7 @@
 		DialogContent,
 		DialogFooter,
 		DialogHeader,
-		DialogTitle,
-		DialogTrigger
+		DialogTitle
 	} from '$components/ui/dialog/index.js';
 	import type { GameManager } from '$lib/state/gameManager.svelte';
 	import { confirmDialog } from '$lib/utils/dialogs';
@@ -42,7 +41,6 @@
 </script>
 
 <Dialog bind:open={isOpen}>
-	<DialogTrigger>Open</DialogTrigger>
 	<DialogContent
 		class="flex max-h-[90vh] max-w-2xl flex-col overflow-hidden p-0 sm:max-w-[90vw] md:max-w-2xl"
 	>

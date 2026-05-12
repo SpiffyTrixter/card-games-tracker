@@ -5,8 +5,7 @@
 		DialogContent,
 		DialogFooter,
 		DialogHeader,
-		DialogTitle,
-		DialogTrigger
+		DialogTitle
 	} from '$lib/components/ui/dialog/index.js';
 
 	let { isOpen = $bindable(false), title, rules: RulesComponent } = $props();
@@ -17,7 +16,6 @@
 </script>
 
 <Dialog bind:open={isOpen}>
-	<DialogTrigger>Rules</DialogTrigger>
 	<DialogContent
 		class="flex max-h-[90vh] max-w-4xl flex-col overflow-hidden p-0 sm:max-w-[90vw] md:max-w-4xl"
 	>

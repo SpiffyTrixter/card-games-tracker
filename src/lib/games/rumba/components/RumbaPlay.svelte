@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { untrack } from 'svelte';
+	import { slide } from 'svelte/transition';
 
 	import { Badge } from '$components/ui/badge/index.js';
 	import { Button } from '$components/ui/button/index.js';
@@ -153,8 +154,8 @@
 	{#if input}
 		{@const isSit = input.state === 'sit-out'}
 		{@const disableSit = player.score <= 5 || getConsecutiveSits(player.id) >= 2}
-		<div class="flex items-center gap-3">
-			<span class="text-lg font-medium">{player.name}</span>
+		<div class="flex h-12 min-w-0 flex-col justify-center">
+			<span class="truncate text-lg font-medium">{player.name}</span>
 		</div>
 		<div class="relative flex h-10 w-full overflow-hidden rounded-lg bg-muted p-1 sm:w-48 md:h-11">
 			<div
@@ -191,7 +192,11 @@
 	{@const input = roundInputs[i]}
 	{#if input}
 		{@const isRumba = input.state === 'rumba'}
-		<span class={cn('text-lg font-medium', isRumba && 'text-primary')}>{player.name}</span>
+		<div class="flex h-12 min-w-0 flex-col justify-center">
+			<span class={cn('truncate text-lg font-medium', isRumba && 'text-primary')}
+				>{player.name}</span
+			>
+		</div>
 		<div class="relative flex h-10 w-full overflow-hidden rounded-lg bg-muted p-1 sm:w-48 md:h-11">
 			<div
 				class="absolute top-1 bottom-1 left-1 w-[calc(50%-4px)] rounded-md bg-primary shadow-sm transition-all duration-300 ease-out"
@@ -223,15 +228,20 @@
 {#snippet renderScoringCounter(player: PlayerState, i: number)}
 	{@const input = roundInputs[i]}
 	{#if input}
-		<div class="min-w-0">
-			<span class="block truncate text-lg font-medium">{player.name}</span>
+		<div class="flex h-12 min-w-0 flex-col justify-center">
+			<span class="truncate text-lg font-medium">{player.name}</span>
 			{#if input.state === 'rumba'}
-				<Badge variant="default" class="mt-1 text-[10px] font-bold tracking-tighter uppercase">
-					Rumba Mode
-				</Badge>
+				<div in:slide={{ axis: 'y' }}>
+					<Badge
+						variant="default"
+						class="mt-0.5 h-4 text-[9px] font-bold tracking-tighter uppercase"
+					>
+						Rumba Mode
+					</Badge>
+				</div>
 			{/if}
 		</div>
-		<div class="flex shrink-0 items-center gap-2 md:gap-4">
+		<div class="flex shrink-0 items-center gap-2 sm:w-48 sm:justify-center md:gap-4">
 			<Button
 				variant="outline"
 				size="icon"
