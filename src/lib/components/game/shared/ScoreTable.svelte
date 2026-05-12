@@ -14,7 +14,7 @@
 	);
 </script>
 
-<div class="flex flex-col gap-2 p-4 pt-0 md:p-8 md:pt-0">
+<div class="flex flex-col gap-2 p-4 pt-0 md:p-8 md:py-0">
 	<button
 		onclick={() => (isExpanded = !isExpanded)}
 		class="flex items-center justify-between rounded-xl border border-border bg-muted/50 px-4 py-3 text-muted-foreground transition-colors hover:bg-muted"

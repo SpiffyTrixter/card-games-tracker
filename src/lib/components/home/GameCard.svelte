@@ -3,6 +3,7 @@
 	import { Badge } from '$components/ui/badge/index.js';
 	import { Button } from '$components/ui/button/index.js';
 	import * as Card from '$components/ui/card/index.js';
+	import { PersistenceService } from '$lib/services/persistence';
 	import { getRulesContext } from '$state/rulesContext';
 	import type { Game } from '$types/game';
 
@@ -19,6 +20,11 @@
 	}: Game = $props();
 
 	const { openRules } = getRulesContext();
+
+	const hasActiveSession = $derived.by(() => {
+		const session = PersistenceService.getSession(id);
+		return session && session.state !== 'finished';
+	});
 </script>
 
 <Card.Root
@@ -123,9 +129,10 @@
 			<Button size="sm" href={resolve(`/games/${id}`)} class="gap-1">
 				<span
 					class="material-symbols-outlined text-[14px]"
-					style="font-variation-settings: 'FILL' 1;">play_arrow</span
+					style="font-variation-settings: 'FILL' 1;"
+					>{hasActiveSession ? 'resume' : 'play_arrow'}</span
 				>
-				Tracker
+				{hasActiveSession ? 'Continue' : 'Tracker'}
 			</Button>
 		</div>
 	</Card.Footer>

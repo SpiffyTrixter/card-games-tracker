@@ -65,7 +65,7 @@
 	}
 </script>
 
-<div class="flex flex-col gap-6 p-4 md:gap-8 md:p-8">
+<div class="flex flex-col gap-2 p-2 md:gap-4 md:p-6">
 	<!-- Navigation -->
 	<div
 		class="flex items-center justify-between rounded-xl border bg-muted p-1 text-[9px] tracking-wider uppercase md:p-2 md:text-[10px]"

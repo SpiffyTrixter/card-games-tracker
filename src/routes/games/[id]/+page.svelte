@@ -54,7 +54,7 @@
 				<GameSetup gameManager={gm} playersLimit={game.players} onStart={startGame} />
 			{/if}
 		{:else if gm.session.state === 'playing'}
-			<div class="flex flex-col gap-6 md:gap-8">
+			<div class="flex flex-col gap-2">
 				{#if game.components?.scoreboard}
 					{#await game.components.scoreboard() then module}
 						{@const ScoreboardComp = module.default}
