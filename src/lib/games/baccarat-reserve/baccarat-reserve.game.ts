@@ -1,5 +1,5 @@
-import type { Game } from '$lib/types/game';
 import { frenchDeck } from '$lib/data/decks/french';
+import type { Game } from '$lib/types/game';
 
 export const baccaratReserve: Game = {
 	id: 'baccarat-reserve',

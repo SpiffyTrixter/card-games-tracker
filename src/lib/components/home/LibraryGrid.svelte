@@ -1,6 +1,6 @@
 <script lang="ts">
 	import GameCard from '$components/home/GameCard.svelte';
-	import { libraryGames } from '$data/games';
+	import { libraryGames } from '$lib/games';
 </script>
 
 <section class="flex flex-col gap-8">

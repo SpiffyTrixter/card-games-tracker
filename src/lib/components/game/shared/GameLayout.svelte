@@ -4,6 +4,7 @@
 	import Footer from '$components/shared/Footer.svelte';
 	import Header from '$components/shared/Header.svelte';
 	import RulesModal from '$components/shared/RulesModal.svelte';
+	import { PersistenceService } from '$lib/services/persistence';
 	import type { GameManager } from '$lib/state/gameManager.svelte';
 	import { gameStatus } from '$lib/state/gameStatus.svelte';
 	import type { Game } from '$lib/types/game';
@@ -27,6 +28,11 @@
 		const inProgress = gameManager.session.state === 'playing';
 
 		if (inProgress) {
+			gameStatus.currentGameId = game.id;
+			gameStatus.stopGame = () => {
+				gameManager.reset();
+				PersistenceService.clearSession(game.id);
+			};
 			gameStatus.headerState = {
 				title: game.title,
 				showSearch: false,
@@ -39,12 +45,16 @@
 		} else {
 			gameStatus.headerState = { title: 'Games', showSearch: true, actions: undefined };
 			gameStatus.isGameInProgress = false;
+			gameStatus.currentGameId = null;
+			gameStatus.stopGame = undefined;
 		}
 	});
 
 	onMount(() => {
 		return () => {
 			gameStatus.isGameInProgress = false;
+			gameStatus.currentGameId = null;
+			gameStatus.stopGame = undefined;
 			gameStatus.headerState = { title: 'Games', showSearch: true, actions: undefined };
 		};
 	});

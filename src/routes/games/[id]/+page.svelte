@@ -7,7 +7,7 @@
 	import GameSetup from '$lib/components/game/shared/GameSetup.svelte';
 	import Scoreboard from '$lib/components/game/shared/Scoreboard.svelte';
 	import ScoreTable from '$lib/components/game/shared/ScoreTable.svelte';
-	import { getGameById } from '$lib/data/games/registry';
+	import { getGameById } from '$lib/games/registry';
 	import { GameManager } from '$lib/state/gameManager.svelte';
 
 	const id = $derived(page.params.id as string);

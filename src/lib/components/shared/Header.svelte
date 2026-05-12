@@ -6,18 +6,6 @@
 	import { gameStatus } from '$lib/state/gameStatus.svelte';
 	import { confirmDialog } from '$lib/utils/dialogs';
 
-	async function handleGamesLinkClick(e: MouseEvent) {
-		if (gameStatus.isGameInProgress) {
-			e.preventDefault();
-			const confirmed = await confirmDialog({
-				text: 'A game is currently in progress. Do you really want to leave?',
-				confirmButtonText: 'Leave',
-				cancelButtonText: 'Stay'
-			});
-			if (confirmed) goto(resolve('/'));
-		}
-	}
-
 	async function handleStopGame() {
 		const confirmed = await confirmDialog({
 			text: 'A game is currently in progress. Do you really want to stop and return to the main menu?',
@@ -25,18 +13,21 @@
 			cancelButtonText: 'Continue Playing'
 		});
 		if (confirmed) {
-			// NEW: Direct mutation
+			if (gameStatus.stopGame) {
+				gameStatus.stopGame();
+			}
 			gameStatus.isGameInProgress = false;
-			gameStatus.headerState = { showSearch: true };
+			gameStatus.currentGameId = null;
+			gameStatus.headerState = { title: 'Games', showSearch: true };
 			goto(resolve('/'));
 		}
 	}
 
-	beforeNavigate(async ({ cancel, to }) => {
+	beforeNavigate(async ({ cancel, to, from }) => {
 		if (
 			gameStatus.isGameInProgress &&
-			to?.route.id &&
-			(to.route.id as string) !== '/games/[game]'
+			to?.route.id !== '/games/[id]' &&
+			from?.url.pathname !== to?.url.pathname
 		) {
 			cancel();
 			const confirmed = await confirmDialog({
@@ -45,8 +36,8 @@
 				cancelButtonText: 'Stay'
 			});
 			if (confirmed) {
-				gameStatus.isGameInProgress = false; // NEW
-				if (to) goto(to.url.pathname);
+				gameStatus.isGameInProgress = false;
+				if (to) await goto(to.url.pathname);
 			}
 		}
 	});
@@ -59,11 +50,7 @@
 		class="mx-auto flex w-full max-w-max-width items-center justify-between gap-4 px-margin-mobile py-4 md:px-margin-desktop md:py-8"
 	>
 		<div class="flex min-w-0 items-center gap-2 md:gap-6">
-			<a
-				href={resolve('/')}
-				onclick={handleGamesLinkClick}
-				class="shrink-0 transition-opacity hover:opacity-80"
-			>
+			<a href={resolve('/')} class="shrink-0 transition-opacity hover:opacity-80">
 				<h1
 					class="text-headline-sm font-display-md overflow-hidden tracking-tight text-ellipsis whitespace-nowrap text-primary md:text-display-md dark:text-primary"
 				>

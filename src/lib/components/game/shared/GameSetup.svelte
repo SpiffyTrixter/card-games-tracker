@@ -77,6 +77,7 @@
 						bind:value={player.name}
 						placeholder="Enter Name"
 						class="font-headline-sm md:font-headline-md text-headline-sm md:text-headline-md w-full border-none bg-transparent py-1 text-foreground shadow-none placeholder:text-muted-foreground/40 focus-visible:ring-0"
+						aria-label={`Player name input for ${player.name}`}
 					/>
 				</div>
 
@@ -86,6 +87,7 @@
 					onclick={() => gameManager.removePlayer(player.id)}
 					disabled={gameManager.session.players.length <= playersLimit.min}
 					class="text-muted-foreground hover:bg-destructive/10 hover:text-destructive"
+					aria-label={`Remove player ${player.name}`}
 				>
 					<span class="material-symbols-outlined text-[20px]">delete</span>
 				</Button>

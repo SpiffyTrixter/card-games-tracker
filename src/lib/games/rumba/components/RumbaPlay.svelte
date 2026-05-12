@@ -3,11 +3,10 @@
 
 	import { Badge } from '$components/ui/badge/index.js';
 	import { Button } from '$components/ui/button/index.js';
+	import GameWizard from '$lib/components/game/shared/GameWizard.svelte';
 	import type { GameManager } from '$lib/state/gameManager.svelte';
 	import type { PlayerState, WizardStep } from '$lib/types/game';
 	import { cn } from '$lib/utils';
-
-	import GameWizard from '../shared/GameWizard.svelte';
 
 	let { gameManager: gm }: { gameManager: GameManager } = $props();
 

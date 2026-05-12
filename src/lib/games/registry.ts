@@ -1,6 +1,6 @@
-import type { Game } from '$types/game';
+import type { Game } from '$lib/types/game';
 
-import { rumba } from './rumba';
+import { rumba } from './rumba/rumba.game';
 
 // Central Registry of all available games
 export const gamesRegistry: Record<string, Game> = {

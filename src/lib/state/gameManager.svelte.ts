@@ -1,6 +1,6 @@
-import { getContext, setContext } from 'svelte';
+import { getContext, setContext, untrack } from 'svelte';
 
-import { browser } from '$app/environment';
+import { PersistenceService } from '$lib/services/persistence';
 import type { Game, GameSession, PlayerHistoryEntry } from '$types/game';
 
 export class GameManager {
@@ -17,31 +17,25 @@ export class GameManager {
 	constructor(game: Game) {
 		this.currentGame = game;
 
-		if (browser) {
-			const storageKey = `game_session_${game.id}`;
-			const savedSession = localStorage.getItem(storageKey);
-
-			if (savedSession) {
-				try {
-					this.session = JSON.parse(savedSession);
-				} catch (e) {
-					console.error('Failed to parse saved game session:', e);
-					this.initDefault(game.id);
-				}
-			} else {
-				this.initDefault(game.id);
-			}
-
-			$effect(() => {
-				localStorage.setItem(storageKey, JSON.stringify(this.session));
-			});
+		const savedSession = PersistenceService.getSession(game.id);
+		if (savedSession) {
+			this.session = savedSession;
 		} else {
 			this.initDefault(game.id);
 		}
+
+		$effect(() => {
+			// Track all changes in session and save
+			const sessionCopy = $state.snapshot(this.session);
+			untrack(() => {
+				PersistenceService.saveSession(this.session.gameId, sessionCopy);
+			});
+		});
 	}
 
 	private initDefault(gameId: string) {
 		this.session.gameId = gameId;
+		this.session.players = [];
 		this.addPlayer('Player 1');
 		this.addPlayer('Player 2');
 	}
