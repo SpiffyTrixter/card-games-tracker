@@ -25,7 +25,7 @@
 
 	const hasActiveSession = $derived.by(() => {
 		const session = PersistenceService.getSession(id);
-		return session && session.state !== 'finished';
+		return session && session.state === 'playing';
 	});
 
 	const unwrappedTitle = $derived(unwrap(title));

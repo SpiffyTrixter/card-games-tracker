@@ -34,7 +34,7 @@
 	"game_bell_jass_title": "Schellenjass",
 	"game_bell_jass_description": "A Jass variant where the primary goal is to collect as few points as possible by avoiding Bell cards.",
 	"game_rumba_title": "Rumba",
-	"game_rumba_description": "A captivating synthesis of traditional strategy and modern flair, where every hand is a dance of destiny.",
+	"game_rumba_description": "Rumba Jass is a trick-taking race to zero where players must decide whether to fold or play. You can call \"Rumba\" to double your score gains, but failing to win three tricks results in a massive penalty.",
 	"game_baccarat_reserve_title": "Baccarat Reserve",
 	"game_baccarat_reserve_description": "A high-stakes variant of the classic card game, focused on precision and risk management.",
 	"game_cipher_board_title": "Cipher Board",
