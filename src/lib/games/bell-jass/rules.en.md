@@ -1,43 +1,49 @@
-# Game Instructions: Schellenjass (Herzjass)
+# Schellenjass (Herzjass): Official Rules
 
-Schellenjass (called **Herzjass** when using French-suited cards) is a popular Jass variant where the primary goal is to collect as **few** points as possible – unless you manage to achieve a "Turi."
+Schellenjass (called **Herzjass** when using French-suited cards) is a popular Jass variant focused on avoiding points.
 
-## Key Rules at a Glance
+## 1. Objective
 
-- **Game Mode:** Always played as **Obenabe** (Top-Down: Ace is high, followed by King, Ober/Queen, Under/Jack, etc.).
-- **Trump:** There is no trump suit.
-- **Melds (Weis):** No bonus points for sequences or sets (Weis).
-- **Objective:** Avoid taking cards of the **Bells** suit (or **Hearts**). Each Bell/Heart card counts as **1 point**.
-- **Players:** Usually played with 3 or 4 players (everyone plays for themselves).
+The goal is to capture as few **Bell** (Schellen) cards as possible – unless you manage to collect them all.
 
-## Gameplay
+- Each Bell card captured counts as **1 point**.
+- A full game (Partie) consists of **12 rounds**.
+- The player with the highest total points at the end of the game is the loser.
 
-1.  **Dealing:** All 36 cards are dealt equally among the players.
-2.  **Following Suit:** Players must follow the suit led if possible.
-3.  **Scoring:** After all cards are played, each player counts their Bell/Heart cards. Each card equals 1 point. There are 9 points in total per round.
+## 2. Setup
 
-## Special Case: The "Turi" (All or Nothing)
+- **Players:** 3 or 4 players (everyone plays for themselves).
+- **Cards:** All 36 cards of the Jass deck are dealt.
+  - With 4 players: **9 cards** each.
+  - With 3 players: **12 cards** each.
+- **Trump:** There is **no** trump suit.
+- **Melds:** No bonus points for sequences, sets (Weis), or the last trick.
+- **Dealing:** The first dealer is chosen (usually the scorer). Afterward, the dealer role rotates.
 
-If a player manages to capture **all 9 Bell cards** (or Heart cards) in a single round, they have achieved a **Turi**.
+## 3. Gameplay
 
-- In this case, the player receives **0 points**.
-- All other players receive **9 points** instead (or the Turi is noted as a special victory).
+- **Following Suit:** Players **must** follow the suit led if possible.
+- **Discarding:** If you cannot follow suit, you can discard any card, including Bells.
+- **Leading:** Any suit can be led at any time, including Bells.
+- **Revoking (Not following suit):** If a player fails to follow suit when they could have, they are penalized with all **9 points** for that round, while others receive zero.
 
-## Variations
+---
 
-### Variation with "Striche" (Dashes)
+## 4. Special Case: The "Turi"
 
-Instead of cumulative points, dashes are awarded:
+If a player captures **all 9 Bell cards** in a single round, they have achieved a **Turi**.
 
-- With 4 players, the person with the most Bell cards receives **no** dash, while the other three each receive one.
-- The first person to reach a set number of dashes (e.g., 7) wins and leaves the game.
+- **Scoring:** The player receives **-9 points** (or everyone else receives +9 points).
 
-### Playing for Money
+---
 
-A monetary value is agreed upon per point. At the end, players pay the difference to each other based on their scores.
+## 5. Variations
 
-- _Example:_ If Player A has 2 points and Player B has 7, Player B pays Player A the difference (5 units).
+### Playing with Dashes (Striche)
 
-### The First Trick
+Instead of points, players can play for dashes:
 
-It is a common "house rule" that no Bell/Heart cards may be played in the very first trick if the player has other cards available. However, official regulations do not strictly require this restriction.
+- **Distribution:** In a 4-player game, 3 dashes are awarded to those with the fewest Bells (the loser gets none). In a 3-player game, 2 dashes are awarded.
+- **Objective:** The first player to reach **7 dashes** wins and leaves the game.
+- **Rampo (R):** If two or more players tie for the most Bells, they receive a **Rampo**. An extra dash is required to clear a Rampo in a future round.
+- **Turi in Dashes:** If a player achieves a Turi, they receive **3 dashes** immediately.

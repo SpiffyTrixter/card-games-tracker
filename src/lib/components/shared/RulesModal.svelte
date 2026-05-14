@@ -46,9 +46,9 @@
 
 		<div class="grow overflow-y-auto px-6 py-4 md:px-10 md:py-8">
 			<article
-				class="prose-primary prose-headings:font-display-md prose-headings:text-primary-light prose
-				prose-sm max-w-none
-				prose-invert md:prose-base
+				class="prose-primary prose-headings:font-display-md prose prose-sm
+				max-w-none prose-invert
+				md:prose-base prose-headings:text-primary
 				prose-p:text-foreground prose-strong:text-primary
 				prose-li:text-foreground prose-table:border
 				prose-table:border-border/20 prose-th:bg-muted prose-th:p-2

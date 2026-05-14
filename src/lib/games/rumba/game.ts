@@ -2,9 +2,9 @@ import { jassDeck } from '$lib/data/decks/jass';
 import { m } from '$lib/paraglide/messages.js';
 import type { Game } from '$lib/types/game';
 
-import { rumbaLogic } from './rumba.logic';
-import RumbaRulesDe from './rumba.rules.de.md';
-import RumbaRulesEn from './rumba.rules.en.md';
+import { logic } from './logic';
+import RumbaRulesDe from './rules.de.md';
+import RumbaRulesEn from './rules.en.md';
 
 export const rumba: Game = {
 	id: 'rumba',
@@ -23,7 +23,7 @@ export const rumba: Game = {
 		en: RumbaRulesEn,
 		de: RumbaRulesDe
 	},
-	logic: rumbaLogic,
+	logic: logic,
 	initialScore: 15,
 	components: {
 		play: () => import('./components/RumbaPlay.svelte')

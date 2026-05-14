@@ -1,12 +1,12 @@
-# **Rumba Jass: Offizielle Regeln**
+# Rumba Jass: Offizielle Regeln
 
-## **1. Ziel des Spiels**
+## 1. Ziel des Spiels
 
 Jeder Spieler startet mit **15 Punkten**. Wer zuerst **0 oder weniger Punkte** erreicht, gewinnt.
 
 - Wenn in derselben Runde mehrere Spieler unter 0 Punkte fallen, gewinnt der Spieler mit der **niedrigsten (stärksten negativen)** Punktzahl.
 
-## **2. Spielaufbau**
+## 2. Spielaufbau
 
 - **Karten:** Standard Jass-Kartenset (36 Karten).
 - **Kartenwerte:** As (Höchste), König, Dame, Bauer, 10, 9, 8, 7, 6 (Niedrigste). **Hinweis:** Bauer und 9 haben in diesem Spiel keine spezielle Bedeutung.
@@ -16,11 +16,11 @@ Jeder Spieler startet mit **15 Punkten**. Wer zuerst **0 oder weniger Punkte** e
 
 ---
 
-## **3. Phasen vor dem Spiel**
+## 3. Phasen vor dem Spiel
 
 Bevor die erste Karte gespielt wird, müssen die Spieler nacheinander diese drei Phasen abschließen, beginnend mit dem Spieler rechts vom Geber.
 
-### **Phase 1: Die Teilnahme**
+### Phase 1: Die Teilnahme
 
 Jeder Spieler entscheidet, ob er **"Mitspielt"** oder **"Aussetzt"**.
 
@@ -30,7 +30,7 @@ Jeder Spieler entscheidet, ob er **"Mitspielt"** oder **"Aussetzt"**.
 
 - **Mitspielen:** Du gehst weiter zu Phase 2.
 
-### **Phase 2: Rumba ansagen**
+### Phase 2: Rumba ansagen
 
 Aktive Spieler entscheiden, ob sie **Rumba** ansagen möchten. Mehrere Spieler können in derselben Runde Rumba ansagen.
 
@@ -38,7 +38,7 @@ Aktive Spieler entscheiden, ob sie **Rumba** ansagen möchten. Mehrere Spieler k
 - **Die Belohnung:** Alle gewonnenen oder verlorenen Punkte werden **verdoppelt**.
 - **Phase 3 überspringen:** Wenn **irgendein** Spieler Rumba ansagt, wird Phase 3 (Kartentausch) **übersprungen**. Alle Spieler müssen mit ihren ursprünglichen Karten spielen.
 
-### **Phase 3: Kartentausch**
+### Phase 3: Kartentausch
 
 _Diese Phase findet nur statt, wenn **niemand** Rumba angesagt hat._
 
@@ -48,7 +48,7 @@ _Diese Phase findet nur statt, wenn **niemand** Rumba angesagt hat._
 
 ---
 
-## **4. Spielablauf**
+## 4. Spielablauf
 
 - **Ausspielen:** Der aktive Spieler rechts vom Geber spielt die erste Karte aus.
 - **Farbe bekennen:** Du **musst** die ausgespielte Farbe bedienen, wenn du kannst.
@@ -58,7 +58,7 @@ _Diese Phase findet nur statt, wenn **niemand** Rumba angesagt hat._
 
 ---
 
-## **5. Wertung**
+## 5. Wertung
 
 | Aktion        | Ergebnis            | Punkte           |
 | ------------- | ------------------- | ---------------- |
@@ -70,7 +70,7 @@ _Diese Phase findet nur statt, wenn **niemand** Rumba angesagt hat._
 
 ---
 
-### **Punkteübersicht**
+### Punkteübersicht
 
 - **3 Stiche (Normal):** -3 Pkt
 - **3 Stiche (Rumba):** -6 Pkt

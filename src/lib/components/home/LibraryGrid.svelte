@@ -1,12 +1,12 @@
 <script lang="ts">
 	import GameCard from '$components/home/GameCard.svelte';
-	import { libraryGames } from '$lib/games';
+	import { getAllGames } from '$lib/games';
 	import { m } from '$lib/paraglide/messages.js';
 	import { gameStatus } from '$lib/state/gameStatus.svelte';
 	import { unwrap } from '$lib/utils/i18n';
 
 	const filteredGames = $derived(
-		libraryGames.filter((game) => {
+		getAllGames().filter((game) => {
 			const query = gameStatus.searchQuery.toLowerCase().trim();
 			if (!query) return true;
 

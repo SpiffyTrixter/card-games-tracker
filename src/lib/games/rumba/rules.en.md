@@ -1,12 +1,12 @@
-# **Rumba Jass: Official Rules**
+# Rumba Jass: Official Rules
 
-## **1. Objective**
+## 1. Objective
 
 Start with **15 points**. Be the first player to reach **0 or below**.
 
 - If multiple players reach less than 0 in the same round, the player with the **lowest (most negative)** score wins.
 
-## **2. Setup**
+## 2. Setup
 
 - **Deck:** Standard 36-card Jass deck.
 - **Rank:** Ace (High), King, Queen, Jack, 10, 9, 8, 7, 6 (Low). **Note:** The Jack and 9 have no special value in this game.
@@ -16,11 +16,11 @@ Start with **15 points**. Be the first player to reach **0 or below**.
 
 ---
 
-## **3. The Pre-Play Phases**
+## 3. The Pre-Play Phases
 
 Before the first card is played, players must complete these three phases in order, starting with the player to the right of the dealer.
 
-### **Phase 1: The Commitment**
+### Phase 1: The Commitment
 
 Each player declares if they are **"In"** or **"Out."**
 
@@ -30,7 +30,7 @@ Each player declares if they are **"In"** or **"Out."**
 
 - **Play:** You proceed to Phase 2.
 
-### **Phase 2: Calling Rumba**
+### Phase 2: Calling Rumba
 
 Active players decide if they want to call **Rumba**. Multiple players can call Rumba in the same round.
 
@@ -38,7 +38,7 @@ Active players decide if they want to call **Rumba**. Multiple players can call 
 - **The Reward:** All points gained or lost are **doubled**.
 - **Phase 3 Skip:** If **any** player calls Rumba, Phase 3 (Improvement) is **skipped**. Players must play with their original cards.
 
-### **Phase 3: Card Improvement (The Exchange)**
+### Phase 3: Card Improvement (The Exchange)
 
 _This phase only occurs if **no one** called Rumba._
 
@@ -48,7 +48,7 @@ _This phase only occurs if **no one** called Rumba._
 
 ---
 
-## **4. Gameplay**
+## 4. Gameplay
 
 - **Lead:** The active player to the right of the dealer leads the first trick.
 - **Following Suit:** You **must** follow the suit led if you are able.
@@ -58,7 +58,7 @@ _This phase only occurs if **no one** called Rumba._
 
 ---
 
-## **5. Scoring**
+## 5. Scoring
 
 | Action          | Result                | Points               |
 | --------------- | --------------------- | -------------------- |
@@ -70,7 +70,7 @@ _This phase only occurs if **no one** called Rumba._
 
 ---
 
-### **Summary Table for Scores**
+### Summary Table for Scores
 
 - **3 Tricks (Normal):** -3 pts
 - **3 Tricks (Rumba):** -6 pts

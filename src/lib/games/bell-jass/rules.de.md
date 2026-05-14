@@ -1,43 +1,49 @@
-# Spielanleitung: Schellenjass (Herzjass)
+# Schellenjass (Herzjass): Offizielle Regeln
 
-Der Schellenjass (bei französischen Karten **Herzjass** genannt) ist eine beliebte Jassvariante, bei der das Ziel meist darin besteht, möglichst **wenig** Punkte zu erzielen – es sei denn, man schafft den "Turi".
+Der Schellenjass (bei französischen Karten **Herzjass** genannt) ist eine beliebte Jassvariante, bei der es darum geht, möglichst wenig Punkte zu erzielen.
 
-## Die wichtigsten Regeln auf einen Blick
+## 1. Ziel des Spiels
 
-- **Spielmodus:** Es wird immer **Obenabe** gespielt (Ass ist die höchste Karte, gefolgt von König, Ober/Dame, Under/Bube, etc.).
-- **Trumpf:** Es gibt keinen Trumpf.
-- **Weis:** Es gibt keine Weisspunkte.
-- **Ziel:** Möglichst wenig Karten der Farbe **Schellen** (bzw. **Herz**) in den Stichen zu erhalten. Jede Schellen-/Herzkarte zählt **1 Punkt**.
-- **Spieler:** Normalerweise 3 oder 4 Spieler (jeder spielt für sich).
+Das Ziel ist es, in den Stichen so wenig **Schellenkarten** wie möglich zu erhalten – es sei denn, man schafft es, alle zu sammeln.
 
-## Spielablauf
+- Jede erhaltene Schellenkarte zählt als **1 Punkt**.
+- Eine Partie besteht aus **12 Spielen**.
+- Der Spieler mit der höchsten Punktzahl am Ende der Partie hat verloren.
 
-1.  **Karten verteilen:** Alle 36 Karten werden gleichmässig unter den Spielern verteilt.
-2.  **Farben halten (Farbzwang):** Es muss immer Farbe bekannt werden ("angegeben" werden). Wer eine Schellenkarte (oder Herz) hat, darf diese meist erst ausspielen, wenn er nicht mehr anders kann oder die Farbe angespielt wird (je nach abgemachter Variante).
-3.  **Punkte zählen:** Nach der Runde zählt jeder Spieler seine erhaltenen Schellenkarten. Jede Karte ergibt 1 Punkt. Es gibt insgesamt 9 Punkte pro Runde.
+## 2. Spielaufbau
 
-## Spezialfall: Der "Turi" (Alle oder Keine)
+- **Spieler:** 3 oder 4 Spieler (jeder spielt für sich).
+- **Karten:** Es werden alle 36 Karten des Jass-Sets verteilt.
+  - Bei 4 Spielern: **9 Karten** pro Person.
+  - Bei 3 Spielern: **12 Karten** pro Person.
+- **Trumpf:** Es wird **ohne Trumpf** gespielt.
+- **Weis:** Stöck- und Weispunkte sowie die 5 Punkte für den letzten Stich zählen nicht.
+- **Geber:** Das erste Spiel verteilt der Schreiber. Danach wechselt der Geber.
 
-Wenn es einem Spieler gelingt, **alle 9 Schellenkarten** (bzw. Herzkarten) in einer Runde zu stechen, hat er einen **Turi** gemacht.
+## 3. Spielweise
 
-- In diesem Fall erhält der Spieler **0 Punkte**.
-- Alle anderen Mitspieler erhalten stattdessen **9 Punkte** (oder man notiert den Turi als besonderen Sieg).
+- **Farbzwang:** Es muss immer **Farbe bekannt** werden.
+- **Abwerfen:** Wer keine Karte der ausgespielten Farbe besitzt, kann eine Schellenkarte oder irgendeine andere Karte abwerfen.
+- **Ausspiel:** Das erste Ausspiel zu irgendeinem Stich ist frei. Es kann jede Farbe gespielt werden, auch Schellen.
+- **Nichtfarben (Fehlbehandlung):** Wer absichtlich oder versehentlich nicht Farbe bekennt, obwohl er könnte, erhält sofort alle **9 Punkte** (Schellen) für dieses Spiel. Die anderen Spieler gehen leer aus.
 
-## Varianten
+---
 
-### Variante mit Strichen
+## 4. Spezialfall: Der "Turi"
 
-Anstatt Punkte zu zählen, werden Striche verteilt:
+Wenn es einem Spieler gelingt, **alle 9 Schellenkarten** in einer Runde zu stechen, hat er einen **Turi** gemacht.
 
-- Bei 4 Spielern erhält derjenige mit den meisten Schellenkarten **keinen** Strich, die anderen drei erhalten je einen Strich.
-- Wer zuerst eine vereinbarte Anzahl Striche (z.B. 7) erreicht, hat gewonnen und scheidet aus.
+- **Wertung:** Der Spieler erhält **9 Minuspunkte** (oder alle anderen Spieler erhalten je 9 Punkte).
 
-### Variante mit Geldeinsatz
+---
 
-Es wird ein Betrag pro Punkt vereinbart. Am Ende wird die Differenz der Punkte abgerechnet.
+## 5. Varianten
 
-- _Beispiel:_ Wenn Spieler A 2 Punkte hat und Spieler B 7 Punkte, zahlt B an A die Differenz (5 Einheiten).
+### Spiel mit Strichen
 
-### Die erste Runde
+Statt Punkten können auch Striche verteilt werden:
 
-Oft wird vereinbart, dass im allerersten Stich keine Schelle/Herz ausgegeben werden darf, sofern man noch andere Karten hat. Offiziell ist dies laut Reglement jedoch nicht zwingend vorgeschrieben.
+- **Verteilung:** Bei 4 Spielern werden 3 Striche verteilt, bei 3 Spielern 2 Striche. Der Spieler mit den meisten Schellenkarten erhält **keinen** Strich.
+- **Ziel:** Wer zuerst **7 Striche** erreicht, scheidet als Gewinner aus.
+- **Rampo (R):** Haben zwei oder mehr Spieler die gleiche (höchste) Anzahl an Schellenkarten, wird ein **Rampo** notiert. Um diesen zu löschen, ist ein zusätzlicher Strich in einer folgenden Runde notwendig.
+- **Turi bei Strichen:** Erzielt ein Spieler einen Turi, erhält er sofort **3 Striche**.

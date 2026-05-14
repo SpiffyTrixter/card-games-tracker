@@ -1,6 +1,6 @@
 import type { PlayerState, RoundData, ScoringStrategy } from '$lib/types/game';
 
-export const rumbaLogic: ScoringStrategy = {
+export const logic: ScoringStrategy = {
 	calculateScore: (roundInput: Record<string, Record<string, any>>, players: PlayerState[]) => {
 		const roundData: Record<string, RoundData> = {};
 		players.forEach((p) => {

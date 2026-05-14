@@ -7,7 +7,7 @@
 	import GameSetup from '$lib/components/game/shared/GameSetup.svelte';
 	import Scoreboard from '$lib/components/game/shared/Scoreboard.svelte';
 	import ScoreTable from '$lib/components/game/shared/ScoreTable.svelte';
-	import { getGameById } from '$lib/games/registry';
+	import { getGameById } from '$lib/games';
 	import * as m from '$lib/paraglide/messages.js';
 	import { GameManager } from '$lib/state/gameManager.svelte';
 
