@@ -3,7 +3,9 @@
 	import { Badge } from '$components/ui/badge/index.js';
 	import { Button } from '$components/ui/button/index.js';
 	import * as Card from '$components/ui/card/index.js';
+	import { m } from '$lib/paraglide/messages.js';
 	import { PersistenceService } from '$lib/services/persistence';
+	import { unwrap } from '$lib/utils/i18n';
 	import { getRulesContext } from '$state/rulesContext';
 	import type { Game } from '$types/game';
 
@@ -25,6 +27,10 @@
 		const session = PersistenceService.getSession(id);
 		return session && session.state !== 'finished';
 	});
+
+	const unwrappedTitle = $derived(unwrap(title));
+	const unwrappedDescription = $derived(unwrap(description));
+	const unwrappedCategory = $derived(unwrap(category));
 </script>
 
 <Card.Root
@@ -47,13 +53,13 @@
 			<Badge
 				variant="outline"
 				class="font-label-sm md:text-label-sm bg-background text-[10px] text-muted-foreground"
-				>{category}</Badge
+				>{unwrappedCategory}</Badge
 			>
 			{#if props?.deck}
 				<Badge
 					variant="secondary"
 					class="font-label-sm border border-primary/20 bg-primary/10 text-[9px] text-primary hover:bg-primary/20 md:text-[10px]"
-					>{props.deck.name}</Badge
+					>{unwrap(props.deck.name)}</Badge
 				>
 			{/if}
 		</div>
@@ -63,12 +69,12 @@
 		<Card.Title
 			class="font-headline-sm md:font-headline-lg text-[20px] leading-tight text-foreground md:text-[24px] md:leading-8"
 		>
-			{title}
+			{unwrappedTitle}
 		</Card.Title>
 		<Card.Description
 			class="font-body-sm md:font-body-md line-clamp-2 text-sm text-muted-foreground md:text-body-md"
 		>
-			{description}
+			{unwrappedDescription}
 		</Card.Description>
 
 		{#if props}
@@ -79,7 +85,7 @@
 						class="gap-1 bg-background/50 text-[11px] font-normal text-muted-foreground"
 					>
 						<span class="material-symbols-outlined text-[14px]">casino</span>
-						{props.dice.count}x {props.dice.name}
+						{props.dice.count}x {unwrap(props.dice.name)}
 					</Badge>
 				{/if}
 				{#if props.board}
@@ -88,7 +94,7 @@
 						class="gap-1 bg-background/50 text-[11px] font-normal text-muted-foreground"
 					>
 						<span class="material-symbols-outlined text-[14px]">grid_view</span>
-						{props.board.name}
+						{unwrap(props.board.name)}
 					</Badge>
 				{/if}
 			</div>
@@ -124,7 +130,7 @@
 				class="gap-1 border-border bg-background/30 text-primary hover:border-primary"
 			>
 				<span class="material-symbols-outlined text-[14px]">info</span>
-				Rules
+				{m.rules()}
 			</Button>
 			<Button size="sm" href={resolve(`/games/${id}`)} class="gap-1">
 				<span
@@ -132,7 +138,7 @@
 					style="font-variation-settings: 'FILL' 1;"
 					>{hasActiveSession ? 'resume' : 'play_arrow'}</span
 				>
-				{hasActiveSession ? 'Continue' : 'Tracker'}
+				{hasActiveSession ? m.continue() : m.tracker()}
 			</Button>
 		</div>
 	</Card.Footer>

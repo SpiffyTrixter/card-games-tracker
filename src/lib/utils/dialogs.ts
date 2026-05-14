@@ -1,6 +1,7 @@
 import { mount, unmount } from 'svelte';
 
 import ConfirmDialog from '$lib/components/shared/ConfirmDialog.svelte';
+import * as m from '$lib/paraglide/messages.js';
 
 export const confirmDialog = async (options: {
 	title?: string;
@@ -20,10 +21,10 @@ export const confirmDialog = async (options: {
 			target,
 			props: {
 				isOpen: true,
-				title: options.title || 'Are you sure?',
+				title: options.title || m.are_you_sure(),
 				text: options.text,
-				confirmButtonText: options.confirmButtonText || 'Confirm',
-				cancelButtonText: options.cancelButtonText || 'Cancel',
+				confirmButtonText: options.confirmButtonText || m.confirm(),
+				cancelButtonText: options.cancelButtonText || m.cancel(),
 				onConfirm: () => resolve(true),
 				onCancel: () => resolve(false),
 				destroy

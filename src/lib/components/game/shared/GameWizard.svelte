@@ -3,8 +3,10 @@
 
 	import { Button } from '$components/ui/button/index.js';
 	import * as Card from '$components/ui/card/index.js';
+	import { m } from '$lib/paraglide/messages.js';
 	import type { GameManager } from '$lib/state/gameManager.svelte';
 	import type { WizardStep } from '$lib/types/game';
+	import { unwrap } from '$lib/utils/i18n';
 
 	let {
 		steps,
@@ -91,8 +93,8 @@
 				}}
 				class="flex-1 rounded-lg transition-all duration-300"
 			>
-				{i + 1}. <span class="xs:inline hidden">{step.shortTitle}</span>
-				<span class="xs:hidden">{step.shortTitle.slice(0, 3)}...</span>
+				{i + 1}. <span class="xs:inline hidden">{unwrap(step.shortTitle)}</span>
+				<span class="xs:hidden">{unwrap(step.shortTitle).slice(0, 3)}...</span>
 			</Button>
 		{/each}
 	</div>
@@ -108,7 +110,7 @@
 				<div class="flex min-h-14 items-end justify-between md:min-h-[64px]">
 					<h3 class="flex items-center gap-2 text-xl font-semibold tracking-tight">
 						<span class="material-symbols-outlined text-primary">{currentStep.icon}</span>
-						{currentStep.title}
+						{unwrap(currentStep.title)}
 					</h3>
 					{#if currentStep.extraUI}
 						<div in:fade={{ delay: 400 }}>
@@ -152,7 +154,7 @@
 					onclick={handleBack}
 					class="w-24 py-6 transition-transform active:scale-95 sm:w-32 md:w-48"
 				>
-					Back
+					{m.back()}
 				</Button>
 			</div>
 		{/if}
@@ -160,7 +162,7 @@
 			onclick={handleNext}
 			class="flex-1 py-6 text-lg font-bold shadow-lg transition-all active:scale-95"
 		>
-			{currentStep.buttonText}
+			{unwrap(currentStep.buttonText)}
 		</Button>
 	</div>
 </div>

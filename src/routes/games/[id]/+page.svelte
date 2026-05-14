@@ -8,6 +8,7 @@
 	import Scoreboard from '$lib/components/game/shared/Scoreboard.svelte';
 	import ScoreTable from '$lib/components/game/shared/ScoreTable.svelte';
 	import { getGameById } from '$lib/games/registry';
+	import * as m from '$lib/paraglide/messages.js';
 	import { GameManager } from '$lib/state/gameManager.svelte';
 
 	const id = $derived(page.params.id as string);
@@ -38,9 +39,9 @@
 
 {#if !game}
 	<div class="flex min-h-[50vh] flex-col items-center justify-center p-8 text-center">
-		<h1 class="text-4xl font-bold">Game Not Found</h1>
-		<p class="mt-4 text-muted-foreground">The game you are looking for does not exist.</p>
-		<a href="/" class="mt-8 text-primary hover:underline">Return to Library</a>
+		<h1 class="text-4xl font-bold">{m.game_not_found()}</h1>
+		<p class="mt-4 text-muted-foreground">{m.game_not_found_description()}</p>
+		<a href="/" class="mt-8 text-primary hover:underline">{m.return_to_library()}</a>
 	</div>
 {:else if gm}
 	<GameLayout {game} gameManager={gm}>
@@ -75,7 +76,7 @@
 
 				{#if game.components?.play}
 					{#await game.components.play()}
-						<div class="p-4 text-center opacity-50">Loading interface...</div>
+						<div class="p-4 text-center opacity-50">{m.loading_interface()}</div>
 					{:then module}
 						{@const Play = module.default}
 						<div class="grow">
@@ -92,9 +93,11 @@
 							>
 						</div>
 						<div>
-							<h3 class="text-xl font-bold text-on-surface">Under Development</h3>
+							<h3 class="text-xl font-bold text-on-surface">{m.under_development()}</h3>
 							<p class="mt-1 text-on-surface-variant">
-								The specialized tracking UI for {game.title} is being refined.
+								{m.under_development_description({
+									title: typeof game.title === 'function' ? game.title() : game.title
+								})}
 							</p>
 						</div>
 					</div>

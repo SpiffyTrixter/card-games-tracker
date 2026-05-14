@@ -4,10 +4,12 @@
 	import Footer from '$components/shared/Footer.svelte';
 	import Header from '$components/shared/Header.svelte';
 	import RulesModal from '$components/shared/RulesModal.svelte';
+	import { m } from '$lib/paraglide/messages.js';
 	import { PersistenceService } from '$lib/services/persistence';
 	import type { GameManager } from '$lib/state/gameManager.svelte';
 	import { gameStatus } from '$lib/state/gameStatus.svelte';
 	import type { Game } from '$lib/types/game';
+	import { unwrap } from '$lib/utils/i18n';
 
 	import GameHistory from './GameHistory.svelte';
 
@@ -24,6 +26,9 @@
 	let isRulesOpen = $state(false);
 	let isHistoryOpen = $state(false);
 
+	const unwrappedTitle = $derived(unwrap(game.title));
+	const unwrappedDescription = $derived(unwrap(game.description));
+
 	$effect(() => {
 		const inProgress = gameManager.session.state === 'playing';
 
@@ -34,16 +39,16 @@
 				PersistenceService.clearSession(game.id);
 			};
 			gameStatus.headerState = {
-				title: game.title,
+				title: unwrappedTitle,
 				showSearch: false,
 				actions: [
-					{ icon: 'history', label: 'History', onclick: () => (isHistoryOpen = true) },
-					{ icon: 'info', label: 'Rules', onclick: () => (isRulesOpen = true) }
+					{ icon: 'history', label: m.history(), onclick: () => (isHistoryOpen = true) },
+					{ icon: 'info', label: m.rules(), onclick: () => (isRulesOpen = true) }
 				]
 			};
 			gameStatus.isGameInProgress = true;
 		} else {
-			gameStatus.headerState = { title: 'Games', showSearch: true, actions: undefined };
+			gameStatus.headerState = { title: m.games(), showSearch: true, actions: undefined };
 			gameStatus.isGameInProgress = false;
 			gameStatus.currentGameId = null;
 			gameStatus.stopGame = undefined;
@@ -55,7 +60,7 @@
 			gameStatus.isGameInProgress = false;
 			gameStatus.currentGameId = null;
 			gameStatus.stopGame = undefined;
-			gameStatus.headerState = { title: 'Games', showSearch: true, actions: undefined };
+			gameStatus.headerState = { title: m.games(), showSearch: true, actions: undefined };
 		};
 	});
 </script>
@@ -77,12 +82,12 @@
 					<h2
 						class="font-display-md text-primary-light md:font-display-lg text-headline-lg drop-shadow-md md:text-display-lg"
 					>
-						{game.title}
+						{unwrappedTitle}
 					</h2>
 					<p
 						class="font-body-md md:font-body-lg max-w-xl text-body-md text-on-surface-variant md:text-body-lg"
 					>
-						{game.description}
+						{unwrappedDescription}
 					</p>
 				</div>
 				<div
@@ -97,7 +102,7 @@
 						<div
 							class="font-label-sm md:text-label-sm text-[10px] tracking-wider text-on-surface-variant uppercase"
 						>
-							Players
+							{m.players()}
 						</div>
 					</div>
 					<button
@@ -105,7 +110,7 @@
 						class="font-label-sm flex items-center gap-2 rounded-DEFAULT border border-outline bg-surface/30 px-4 py-2 text-[10px] tracking-wider text-primary uppercase backdrop-blur-md transition-colors duration-300 hover:border-primary"
 					>
 						<span class="material-symbols-outlined text-[18px]">info</span>
-						Rules
+						{m.rules()}
 					</button>
 				</div>
 			</div>
@@ -119,7 +124,7 @@
 	</div>
 </main>
 
-<RulesModal bind:isOpen={isRulesOpen} title={game.title} rules={game.rules} />
+<RulesModal bind:isOpen={isRulesOpen} title={unwrappedTitle} rules={game.rules} />
 
 <GameHistory {gameManager} bind:isOpen={isHistoryOpen} />
 

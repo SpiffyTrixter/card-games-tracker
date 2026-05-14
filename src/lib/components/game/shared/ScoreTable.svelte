@@ -2,6 +2,7 @@
 	import { slide } from 'svelte/transition';
 
 	import * as Table from '$lib/components/ui/table/index.js';
+	import { m } from '$lib/paraglide/messages.js';
 	import type { GameManager } from '$lib/state/gameManager.svelte';
 
 	let { gameManager }: { gameManager: GameManager } = $props();
@@ -21,7 +22,7 @@
 	>
 		<div class="flex items-center gap-2">
 			<span class="material-symbols-outlined text-primary">analytics</span>
-			<span class="font-label-lg tracking-wider uppercase">Score Table</span>
+			<span class="font-label-lg tracking-wider uppercase">{m.score_table()}</span>
 		</div>
 		<span
 			class="material-symbols-outlined transition-transform duration-300"
@@ -39,7 +40,7 @@
 						<Table.Row class="border-b border-border">
 							<Table.Head
 								class="font-label-sm text-[10px] tracking-widest text-muted-foreground uppercase md:px-6"
-								>Round</Table.Head
+								>{m.round()}</Table.Head
 							>
 							{#each players as player (player.id)}
 								<Table.Head
@@ -68,7 +69,7 @@
 													{entry.delta > 0 ? '+' : ''}{entry.delta}
 												</span>
 												<span class="text-[10px] text-muted-foreground/60">
-													Score: {entry.scoreAfter}
+													{m.score_label({ score: entry.scoreAfter })}
 												</span>
 											</div>
 										{:else}
@@ -81,7 +82,9 @@
 					</Table.Body>
 					<Table.Footer class="bg-primary/5 font-bold text-primary">
 						<Table.Row>
-							<Table.Cell class="font-label-md tracking-widest uppercase md:px-6">Total</Table.Cell>
+							<Table.Cell class="font-label-md tracking-widest uppercase md:px-6"
+								>{m.total()}</Table.Cell
+							>
 							{#each players as player (player.id)}
 								<Table.Cell class="md:px-6">
 									<div class="flex flex-col">

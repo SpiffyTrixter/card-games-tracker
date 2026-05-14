@@ -7,6 +7,7 @@
 		DialogHeader,
 		DialogTitle
 	} from '$components/ui/dialog/index.js';
+	import { m } from '$lib/paraglide/messages.js';
 	import type { GameManager } from '$lib/state/gameManager.svelte';
 	import { confirmDialog } from '$lib/utils/dialogs';
 
@@ -27,9 +28,9 @@
 
 	async function handleRewind(index: number) {
 		const confirmed = await confirmDialog({
-			text: `Rewind game to the end of round ${index + 1}?`,
-			confirmButtonText: 'Rewind',
-			cancelButtonText: 'Cancel'
+			text: m.rewind_confirm_text({ round: index + 1 }),
+			confirmButtonText: m.rewind(),
+			cancelButtonText: m.cancel()
 		});
 
 		if (confirmed) {
@@ -46,7 +47,8 @@
 	>
 		<DialogHeader class="border-b border-border bg-muted/30 px-6 py-4">
 			<DialogTitle class="text-headline-sm font-display-md flex items-center gap-2 text-primary">
-				<span class="material-symbols-outlined">history</span> Game History
+				<span class="material-symbols-outlined">history</span>
+				{m.game_history()}
 			</DialogTitle>
 		</DialogHeader>
 
@@ -57,7 +59,7 @@
 					? 'border-primary bg-primary/5 text-primary'
 					: 'border-transparent text-muted-foreground'}"
 			>
-				Rounds
+				{m.rounds()}
 			</button>
 			<button
 				onclick={() => (activeTab = 'matches')}
@@ -65,21 +67,23 @@
 					? 'border-primary bg-primary/5 text-primary'
 					: 'border-transparent text-muted-foreground'}"
 			>
-				Matches
+				{m.matches()}
 			</button>
 		</div>
 
 		<div class="grow space-y-4 overflow-y-auto p-4 md:p-6">
 			{#if activeTab === 'rounds'}
 				{#if roundsCount === 0}
-					<div class="py-12 text-center text-muted-foreground italic">No rounds played yet.</div>
+					<div class="py-12 text-center text-muted-foreground italic">{m.no_rounds_played()}</div>
 				{:else}
 					{#each roundIndices as roundIndex (roundIndex)}
 						<div class="overflow-hidden rounded-xl border border-border/50 bg-muted/30">
 							<div
 								class="flex items-center justify-between border-b border-border/50 bg-muted/50 p-3"
 							>
-								<span class="font-label-md text-primary">Round {roundIndex + 1}</span>
+								<span class="font-label-md text-primary"
+									>{m.round_label({ round: roundIndex + 1 })}</span
+								>
 								<Button
 									variant="ghost"
 									size="sm"
@@ -87,7 +91,7 @@
 									class="h-8 gap-1 px-2 text-xs text-primary hover:bg-primary/10 hover:text-primary"
 								>
 									<span class="material-symbols-outlined text-sm">settings_backup_restore</span>
-									Rewind here
+									{m.rewind_here()}
 								</Button>
 							</div>
 							<div class="grid grid-cols-2 gap-4 p-4 sm:grid-cols-4">
@@ -115,13 +119,15 @@
 					{/each}
 				{/if}
 			{:else}
-				<div class="py-12 text-center text-muted-foreground italic">Match history coming soon.</div>
+				<div class="py-12 text-center text-muted-foreground italic">
+					{m.match_history_coming_soon()}
+				</div>
 			{/if}
 		</div>
 
 		<DialogFooter class="border-t border-border bg-muted/30 px-6 py-4">
 			<Button onclick={() => (isOpen = false)} size="lg" class="font-label-lg w-full md:w-auto"
-				>Close</Button
+				>{m.close()}</Button
 			>
 		</DialogFooter>
 	</DialogContent>

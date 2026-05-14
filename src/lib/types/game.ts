@@ -8,9 +8,9 @@ export interface Players {
 }
 
 export interface EquipmentItem {
-	name: string;
+	name: string | (() => string);
 	count?: number;
-	description?: string;
+	description?: string | (() => string);
 }
 
 export interface GameProps {
@@ -22,14 +22,14 @@ export interface GameProps {
 
 export interface Game {
 	id: string;
-	title: string;
-	description: string;
-	category: string;
+	title: string | (() => string);
+	description: string | (() => string);
+	category: string | (() => string);
 	players: Players;
 	icon?: string;
 	props?: GameProps;
 
-	rules?: string | Component;
+	rules?: string | Component | Record<string, Component>;
 	logic?: ScoringStrategy;
 	initialScore?: number;
 
@@ -45,10 +45,10 @@ export interface Game {
 
 export interface WizardStep {
 	id: string;
-	shortTitle: string;
-	title: string;
+	shortTitle: string | (() => string);
+	title: string | (() => string);
 	icon: string;
-	buttonText: string;
+	buttonText: string | (() => string);
 	validate?: () => string | null;
 	filterPlayers?: (player: PlayerState, index: number) => boolean;
 	playerAction: import('svelte').Snippet<[PlayerState, number]>;

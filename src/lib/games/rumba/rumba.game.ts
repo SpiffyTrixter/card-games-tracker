@@ -1,20 +1,28 @@
 import { jassDeck } from '$lib/data/decks/jass';
+import { m } from '$lib/paraglide/messages.js';
 import type { Game } from '$lib/types/game';
 
 import { rumbaLogic } from './rumba.logic';
-import RumbaRules from './rumba.rules.md';
+import RumbaRulesDe from './rumba.rules.de.md';
+import RumbaRulesEn from './rumba.rules.en.md';
 
 export const rumba: Game = {
 	id: 'rumba',
-	title: 'Rumba',
-	description: 'A captivating synthesis of traditional strategy and modern flair...',
-	category: 'Cards',
+	title: m.game_rumba_title,
+	description: m.game_rumba_description,
+	category: m.category_cards,
 	players: { min: 2, max: 4 },
 	icon: 'style',
 	props: {
-		deck: jassDeck
+		deck: {
+			...jassDeck,
+			name: m.equipment_jass_deck
+		}
 	},
-	rules: RumbaRules,
+	rules: {
+		en: RumbaRulesEn,
+		de: RumbaRulesDe
+	},
 	logic: rumbaLogic,
 	initialScore: 15,
 	components: {

@@ -7,8 +7,24 @@
 		DialogHeader,
 		DialogTitle
 	} from '$lib/components/ui/dialog/index.js';
+	import { m } from '$lib/paraglide/messages.js';
+	import { getLocale } from '$lib/paraglide/runtime.js';
+	import { unwrap } from '$lib/utils/i18n';
 
-	let { isOpen = $bindable(false), title, rules: RulesComponent } = $props();
+	let { isOpen = $bindable(false), title, rules } = $props();
+
+	const unwrappedTitle = $derived(unwrap(title));
+	const currentLocale = $derived(getLocale());
+
+	const RulesComponent = $derived.by(() => {
+		if (!rules) return null;
+
+		if (typeof rules === 'string' || typeof rules === 'function') {
+			return rules;
+		}
+
+		return rules[currentLocale] || rules['en'] || Object.values(rules)[0] || null;
+	});
 
 	function close() {
 		isOpen = false;
@@ -24,7 +40,7 @@
 				class="text-headline-sm font-display-md flex items-center gap-2 text-primary md:text-headline-lg"
 			>
 				<span class="material-symbols-outlined text-[24px]">description</span>
-				{title} Rules
+				{m.rules_title({ title: unwrappedTitle })}
 			</DialogTitle>
 		</DialogHeader>
 
@@ -40,15 +56,20 @@
 				prose-td:p-2 prose-hr:border-border/30"
 			>
 				{#if RulesComponent}
-					<RulesComponent />
+					{#if typeof RulesComponent === 'string'}
+						<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+						{@html RulesComponent}
+					{:else}
+						<RulesComponent />
+					{/if}
 				{:else}
-					<p class="text-muted-foreground italic">No rules available for this game yet.</p>
+					<p class="text-muted-foreground italic">{m.no_rules_available()}</p>
 				{/if}
 			</article>
 		</div>
 
 		<DialogFooter class="border-t border-border bg-muted/30 px-6 py-4">
-			<Button onclick={close} size="lg" class="font-label-lg w-full md:w-auto">Got it</Button>
+			<Button onclick={close} size="lg" class="font-label-lg w-full md:w-auto">{m.got_it()}</Button>
 		</DialogFooter>
 	</DialogContent>
 </Dialog>

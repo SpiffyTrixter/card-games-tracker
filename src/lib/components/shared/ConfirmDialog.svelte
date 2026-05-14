@@ -1,12 +1,22 @@
 <script lang="ts">
-	import * as AlertDialog from '$lib/components/ui/alert-dialog/index.js';
+	import {
+		AlertDialog,
+		AlertDialogAction,
+		AlertDialogCancel,
+		AlertDialogContent,
+		AlertDialogDescription,
+		AlertDialogFooter,
+		AlertDialogHeader,
+		AlertDialogTitle
+	} from '$lib/components/ui/alert-dialog/index.js';
+	import { m } from '$lib/paraglide/messages.js';
 
 	let {
 		isOpen = $bindable(true),
-		title = 'Are you sure?',
+		title = m.are_you_sure(),
 		text,
-		confirmButtonText = 'Confirm',
-		cancelButtonText = 'Cancel',
+		confirmButtonText = m.confirm(),
+		cancelButtonText = m.cancel(),
 		onConfirm,
 		onCancel,
 		destroy
@@ -41,23 +51,23 @@
 	}
 </script>
 
-<AlertDialog.Root bind:open={isOpen} onOpenChange={handleOpenChange}>
-	<AlertDialog.Content class="border-border bg-card">
-		<AlertDialog.Header>
-			<AlertDialog.Title class="text-foreground">{title}</AlertDialog.Title>
-			<AlertDialog.Description class="text-muted-foreground">
+<AlertDialog bind:open={isOpen} onOpenChange={handleOpenChange}>
+	<AlertDialogContent class="border-border bg-card">
+		<AlertDialogHeader>
+			<AlertDialogTitle class="text-foreground">{title}</AlertDialogTitle>
+			<AlertDialogDescription class="text-muted-foreground">
 				{text}
-			</AlertDialog.Description>
-		</AlertDialog.Header>
-		<AlertDialog.Footer>
-			<AlertDialog.Cancel onclick={handleCancel} class="text-foreground hover:bg-muted"
-				>{cancelButtonText}</AlertDialog.Cancel
+			</AlertDialogDescription>
+		</AlertDialogHeader>
+		<AlertDialogFooter>
+			<AlertDialogCancel onclick={handleCancel} class="text-foreground hover:bg-muted"
+				>{cancelButtonText}</AlertDialogCancel
 			>
-			<AlertDialog.Action
+			<AlertDialogAction
 				onclick={handleConfirm}
 				class="bg-primary text-primary-foreground hover:bg-primary/90"
-				>{confirmButtonText}</AlertDialog.Action
+				>{confirmButtonText}</AlertDialogAction
 			>
-		</AlertDialog.Footer>
-	</AlertDialog.Content>
-</AlertDialog.Root>
+		</AlertDialogFooter>
+	</AlertDialogContent>
+</AlertDialog>

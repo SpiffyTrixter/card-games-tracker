@@ -5,6 +5,7 @@
 	import { Badge } from '$components/ui/badge/index.js';
 	import { Button } from '$components/ui/button/index.js';
 	import GameWizard from '$lib/components/game/shared/GameWizard.svelte';
+	import { m } from '$lib/paraglide/messages.js';
 	import type { GameManager } from '$lib/state/gameManager.svelte';
 	import type { PlayerState, WizardStep } from '$lib/types/game';
 	import { cn } from '$lib/utils';
@@ -51,9 +52,8 @@
 		if (input.state === 'sit-out') {
 			input.state = 'standard';
 		} else {
-			if (player.score <= 5) return `${player.name} cannot sit out with 5 points or less.`;
-			if (getConsecutiveSits(player.id) >= 2)
-				return `${player.name} must play (max 2 consecutive sits).`;
+			if (player.score <= 5) return m.rumba_cannot_sit_out({ name: player.name });
+			if (getConsecutiveSits(player.id) >= 2) return m.rumba_must_play({ name: player.name });
 			input.state = 'sit-out';
 			input.tricks = 0;
 		}
@@ -109,35 +109,35 @@
 	const rumbaSteps: WizardStep[] = [
 		{
 			id: 'participants',
-			shortTitle: 'Participants',
-			title: 'Who is playing?',
+			shortTitle: m.rumba_participants,
+			title: m.rumba_participants_title,
 			icon: 'group',
-			buttonText: 'Confirm Participants',
+			buttonText: m.rumba_confirm_participants,
 			validate: () => {
-				if (roundInputs.every((r) => r.state === 'sit-out')) return 'Someone must play.';
+				if (roundInputs.every((r) => r.state === 'sit-out')) return m.rumba_someone_must_play();
 				return null;
 			},
 			playerAction: renderParticipantToggle
 		},
 		{
 			id: 'rumba',
-			shortTitle: 'Rumba',
-			title: 'Any Rumba calls?',
+			shortTitle: m.rumba_rumba_calls,
+			title: m.rumba_rumba_calls_title,
 			icon: 'auto_awesome',
-			buttonText: 'Enter Tricks',
+			buttonText: m.rumba_enter_tricks,
 			filterPlayers: (p, i) => roundInputs[i]?.state !== 'sit-out',
 			playerAction: renderRumbaToggle
 		},
 		{
 			id: 'scoring',
-			shortTitle: 'Scoring',
-			title: 'Trick Tally',
+			shortTitle: m.rumba_scoring,
+			title: m.rumba_scoring_title,
 			icon: 'edit_note',
-			buttonText: 'Record Round',
+			buttonText: m.rumba_record_round,
 			filterPlayers: (p, i) => roundInputs[i]?.state !== 'sit-out',
 			validate: () => {
 				if (currentTotalTricks !== TOTAL_TRICKS) {
-					return `Total tricks must be exactly ${TOTAL_TRICKS}. Currently: ${currentTotalTricks}`;
+					return m.rumba_total_tricks({ total: TOTAL_TRICKS, current: currentTotalTricks });
 				}
 				return null;
 			},
@@ -173,7 +173,7 @@
 					? 'text-muted-foreground'
 					: 'text-primary-foreground'}"
 			>
-				Play
+				{m.rumba_play()}
 			</button>
 			<button
 				onclick={() => toggleSitOut(i)}
@@ -182,7 +182,7 @@
 					? 'font-bold text-primary'
 					: 'text-muted-foreground'}"
 			>
-				Sit Out
+				{m.rumba_sit_out()}
 			</button>
 		</div>
 	{/if}
@@ -211,7 +211,7 @@
 					? 'text-muted-foreground'
 					: 'text-primary-foreground'}"
 			>
-				Standard
+				{m.rumba_standard()}
 			</button>
 			<button
 				onclick={() => toggleRumba(i)}
@@ -219,7 +219,7 @@
 					? 'font-bold text-primary-foreground'
 					: 'text-muted-foreground'}"
 			>
-				Rumba!
+				{m.rumba_rumba()}
 			</button>
 		</div>
 	{/if}
@@ -236,7 +236,7 @@
 						variant="default"
 						class="mt-0.5 h-4 text-[9px] font-bold tracking-tighter uppercase"
 					>
-						Rumba Mode
+						{m.rumba_mode()}
 					</Badge>
 				</div>
 			{/if}
@@ -277,6 +277,8 @@
 		>
 			{remainingTricks}
 		</div>
-		<div class="mt-1 text-[10px] tracking-widest text-muted-foreground uppercase">Remaining</div>
+		<div class="mt-1 text-[10px] tracking-widest text-muted-foreground uppercase">
+			{m.rumba_remaining()}
+		</div>
 	</div>
 {/snippet}

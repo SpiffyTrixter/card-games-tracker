@@ -4,7 +4,7 @@
 
 Start with **15 points**. Be the first player to reach **0 or below**.
 
-- If multiple players reach >= 0 in the same round, the player with the **lowest (most negative)** score wins.
+- If multiple players reach less than 0 in the same round, the player with the **lowest (most negative)** score wins.
 
 ## **2. Setup**
 

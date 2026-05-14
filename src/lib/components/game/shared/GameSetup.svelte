@@ -4,6 +4,7 @@
 
 	import { Button } from '$components/ui/button/index.js';
 	import { Input } from '$components/ui/input/index.js';
+	import { m } from '$lib/paraglide/messages.js';
 	import type { GameManager } from '$lib/state/gameManager.svelte';
 	import type { Players, PlayerState } from '$lib/types/game';
 
@@ -38,10 +39,11 @@
 			<h2
 				class="font-display-sm text-headline-sm md:font-headline-lg flex items-center gap-2 text-primary md:text-[20px]"
 			>
-				<span class="material-symbols-outlined">person_add</span> Players
+				<span class="material-symbols-outlined">person_add</span>
+				{m.players()}
 			</h2>
 			<p class="font-label-sm text-[10px] text-muted-foreground md:text-[11px]">
-				Drag to change sequence
+				{m.drag_to_change_sequence()}
 			</p>
 		</div>
 		<Button
@@ -51,7 +53,8 @@
 			disabled={gameManager.session.players.length >= playersLimit.max}
 			class="gap-1 border-border bg-muted hover:border-primary"
 		>
-			<span class="material-symbols-outlined text-[16px]">add</span> Add
+			<span class="material-symbols-outlined text-[16px]">add</span>
+			{m.add()}
 		</Button>
 	</div>
 
@@ -75,7 +78,7 @@
 				<div class="min-w-0 grow">
 					<Input
 						bind:value={player.name}
-						placeholder="Enter Name"
+						placeholder={m.enter_name()}
 						class="font-headline-sm md:font-headline-md text-headline-sm md:text-headline-md w-full border-none bg-transparent py-1 text-foreground shadow-none placeholder:text-muted-foreground/40 focus-visible:ring-0"
 						aria-label={`Player name input for ${player.name}`}
 					/>
@@ -102,7 +105,7 @@
 			class="w-full py-6 text-lg font-bold shadow-lg"
 		>
 			<span class="material-symbols-outlined text-[24px]">play_circle</span>
-			Commence
+			{m.commence()}
 		</Button>
 	</div>
 </div>

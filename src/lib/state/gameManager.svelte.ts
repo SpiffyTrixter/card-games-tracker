@@ -1,5 +1,6 @@
 import { getContext, setContext, untrack } from 'svelte';
 
+import { m } from '$lib/paraglide/messages.js';
 import { PersistenceService } from '$lib/services/persistence';
 import type { Game, GameSession, PlayerHistoryEntry } from '$types/game';
 
@@ -36,15 +37,15 @@ export class GameManager {
 	private initDefault(gameId: string) {
 		this.session.gameId = gameId;
 		this.session.players = [];
-		this.addPlayer('Player 1');
-		this.addPlayer('Player 2');
+		this.addPlayer(m.default_player_name({ number: '1' }));
+		this.addPlayer(m.default_player_name({ number: '2' }));
 	}
 
 	addPlayer(name: string) {
 		const id = crypto.randomUUID();
 		this.session.players.push({
 			id,
-			name: name || `Player ${this.session.players.length + 1}`,
+			name: name || m.default_player_name({ number: String(this.session.players.length + 1) }),
 			score: 0,
 			history: []
 		});

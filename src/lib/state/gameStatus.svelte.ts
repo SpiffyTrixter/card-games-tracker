@@ -13,6 +13,7 @@ export interface HeaderState {
 class GameStatus {
 	isGameInProgress = $state(false);
 	currentGameId = $state<string | null>(null);
+	searchQuery = $state('');
 	headerState = $state<HeaderState>({ showSearch: true });
 	stopGame = $state<(() => void) | undefined>(undefined);
 }
