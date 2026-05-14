@@ -8,7 +8,6 @@
 	import { m } from '$lib/paraglide/messages.js';
 	import type { GameManager } from '$lib/state/gameManager.svelte';
 	import type { PlayerState, WizardStep } from '$lib/types/game';
-	import { cn } from '$lib/utils';
 
 	let { gameManager: gm }: { gameManager: GameManager } = $props();
 
@@ -106,6 +105,20 @@
 		}
 	}
 
+	function getPlayerDelta(i: number) {
+		const input = roundInputs[i];
+		if (!input) return 0;
+		const tricks = input.tricks;
+
+		if (input.state === 'sit-out') {
+			return 0;
+		} else if (input.state === 'rumba') {
+			return tricks >= 3 ? -(tricks * 2) : 10;
+		} else {
+			return tricks === 0 ? 5 : -tricks;
+		}
+	}
+
 	const rumbaSteps: WizardStep[] = [
 		{
 			id: 'participants',
@@ -142,21 +155,21 @@
 				return null;
 			},
 			playerAction: renderScoringCounter,
-			extraUI: renderTricksCounter
+			extraUI: renderTricksCounter,
+			getDelta: (p, i) => getPlayerDelta(i),
+			showScoreChange: true
 		}
 	];
 </script>
 
-<GameWizard steps={rumbaSteps} gameManager={gm} onSubmit={submitRound} />
+<GameWizard steps={rumbaSteps} gameManager={gm} onSubmit={submitRound} positiveIsGood={false} />
 
 {#snippet renderParticipantToggle(player: PlayerState, i: number)}
 	{@const input = roundInputs[i]}
 	{#if input}
 		{@const isSit = input.state === 'sit-out'}
 		{@const disableSit = player.score <= 5 || getConsecutiveSits(player.id) >= 2}
-		<div class="flex h-12 min-w-0 flex-col justify-center">
-			<span class="truncate text-lg font-medium">{player.name}</span>
-		</div>
+		<div class="flex h-12 min-w-0 flex-col justify-center"></div>
 		<div class="relative flex h-10 w-full overflow-hidden rounded-lg bg-muted p-1 sm:w-48 md:h-11">
 			<div
 				class="absolute top-1 bottom-1 left-1 w-[calc(50%-4px)] {isSit
@@ -188,15 +201,11 @@
 	{/if}
 {/snippet}
 
-{#snippet renderRumbaToggle(player: PlayerState, i: number)}
+{#snippet renderRumbaToggle(_player: PlayerState, i: number)}
 	{@const input = roundInputs[i]}
 	{#if input}
 		{@const isRumba = input.state === 'rumba'}
-		<div class="flex h-12 min-w-0 flex-col justify-center">
-			<span class={cn('truncate text-lg font-medium', isRumba && 'text-primary')}
-				>{player.name}</span
-			>
-		</div>
+		<div class="flex h-12 min-w-0 flex-col justify-center"></div>
 		<div class="relative flex h-10 w-full overflow-hidden rounded-lg bg-muted p-1 sm:w-48 md:h-11">
 			<div
 				class="absolute top-1 bottom-1 left-1 w-[calc(50%-4px)] rounded-md bg-primary shadow-sm transition-all duration-300 ease-out"
@@ -229,7 +238,6 @@
 	{@const input = roundInputs[i]}
 	{#if input}
 		<div class="flex h-12 min-w-0 flex-col justify-center">
-			<span class="truncate text-lg font-medium">{player.name}</span>
 			{#if input.state === 'rumba'}
 				<div in:slide={{ axis: 'y' }}>
 					<Badge

@@ -7,11 +7,11 @@ import { rumba } from './rumba/game';
 import { velvetDice } from './velvet-dice/velvet-dice.game';
 
 export const gamesRegistry: Record<string, Game> = {
-	rumba,
-	bellJass,
-	baccaratReserve,
-	velvetDice,
-	cipherBoard
+	[rumba.id]: rumba,
+	[bellJass.id]: bellJass,
+	[baccaratReserve.id]: baccaratReserve,
+	[velvetDice.id]: velvetDice,
+	[cipherBoard.id]: cipherBoard
 };
 
 export function getGameById(id: string): Game | undefined {

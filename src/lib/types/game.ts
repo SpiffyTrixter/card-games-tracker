@@ -53,6 +53,8 @@ export interface WizardStep {
 	filterPlayers?: (player: PlayerState, index: number) => boolean;
 	playerAction: import('svelte').Snippet<[PlayerState, number]>;
 	extraUI?: import('svelte').Snippet;
+	getDelta?: (player: PlayerState, index: number) => number;
+	showScoreChange?: boolean;
 }
 
 export interface RoundData {
@@ -90,4 +92,5 @@ export interface GameSession {
 	initialScore: number;
 	startTime: number;
 	endTime?: number;
+	settings?: Record<string, any>;
 }

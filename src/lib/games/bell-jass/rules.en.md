@@ -33,7 +33,7 @@ The goal is to capture as few **Bell** (Schellen) cards as possible – unless y
 
 If a player captures **all 9 Bell cards** in a single round, they have achieved a **Turi**.
 
-- **Scoring:** The player receives **-9 points** (or everyone else receives +9 points).
+- **Scoring:** Every other player receives **+9 points**, while the Turi winner receives zero.
 
 ---
 

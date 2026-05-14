@@ -11,11 +11,13 @@
 	let {
 		gameManager,
 		playersLimit,
-		onStart
+		onStart,
+		extraSettings
 	}: {
 		gameManager: GameManager;
 		playersLimit: Players;
 		onStart: () => void;
+		extraSettings?: import('svelte').Snippet;
 	} = $props();
 
 	function addPlayer() {
@@ -97,6 +99,10 @@
 			</div>
 		{/each}
 	</div>
+
+	{#if extraSettings}
+		{@render extraSettings()}
+	{/if}
 
 	<div class="border-t border-border/30 pt-4 md:pt-6">
 		<Button

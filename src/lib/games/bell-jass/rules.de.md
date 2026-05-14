@@ -33,7 +33,7 @@ Das Ziel ist es, in den Stichen so wenig **Schellenkarten** wie möglich zu erha
 
 Wenn es einem Spieler gelingt, **alle 9 Schellenkarten** in einer Runde zu stechen, hat er einen **Turi** gemacht.
 
-- **Wertung:** Der Spieler erhält **9 Minuspunkte** (oder alle anderen Spieler erhalten je 9 Punkte).
+- **Wertung:** Jeder andere Spieler erhält **+9 Punkte**, während der Turi-Gewinner keine Punkte erhält.
 
 ---
 

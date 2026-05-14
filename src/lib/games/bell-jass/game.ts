@@ -2,6 +2,7 @@ import { jassDeck } from '$lib/data/decks/jass';
 import { m } from '$lib/paraglide/messages.js';
 import type { Game } from '$lib/types/game';
 
+import { logic } from './logic';
 import RulesDe from './rules.de.md';
 import RulesEn from './rules.en.md';
 
@@ -22,5 +23,10 @@ export const bellJass: Game = {
 		en: RulesEn,
 		de: RulesDe
 	},
-	initialScore: 0
+	logic: logic,
+	initialScore: 0,
+	components: {
+		setup: () => import('./components/BellJassSetup.svelte'),
+		play: () => import('./components/BellJassPlay.svelte')
+	}
 };
